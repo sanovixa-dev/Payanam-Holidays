@@ -33,3 +33,48 @@ V1 is complete when all of the following are true:
 7. **Mobile-responsive** — The entire experience works cleanly on phones, since most customers will browse on mobile.
 
 8. **Config-driven content** — Packages are defined in a structured config (file-based for v1), so content changes don't require rewriting code. (Admin UI to edit this is deferred to Phase 2.)
+
+---
+
+## Non-Goals (V1)
+
+The following are explicitly out of scope for V1. Listed to prevent assumption, scope creep, and to set clear expectations with the owner.
+
+### Booking & Payments
+
+- **Online payments / UPI / card checkout** — Sale closes by phone call. Payment handled offline. Deferred to a later phase only if real demand appears.
+- **Real-time availability / seat booking** — V1 captures enquiries, not confirmed bookings. Availability is handled by the owner during the call.
+- **Booking confirmation, tickets, or invoices** — Out of v1. The owner manages these offline.
+- **Cancellation or refund flows** — Out of v1.
+
+### Accounts & Admin
+
+- **Customer login / accounts** — Browsing and enquiry both work without login. Deferred to Phase 2.
+- **Form pre-fill for logged-in users** — Depends on login; deferred to Phase 2.
+- **Admin panel for the owner to add/edit/delete packages** — Deferred to Phase 2. In v1, packages are managed via config file by the developer.
+
+### Content & Features
+
+- **User reviews / ratings / testimonials system** — A static testimonial or two may be hand-placed, but no user-generated review system in v1.
+- **Blog / travel articles / content marketing pages** — Out of v1.
+- **Search bar with free-text queries** — V1 uses category/region filtering, not search. Deferred.
+- **Wishlist / save-for-later / comparison** — Out of v1.
+- **Multi-language / Tamil translation** — V1 is English only. Localization deferred.
+- **Currency conversion** — Prices shown in INR only.
+
+### Communication & Automation
+
+- **Automated email/SMS/WhatsApp to customers** — V1 sends the enquiry to the owner; customer follow-up is a manual call. No automated customer-facing messaging.
+- **Live chat / chatbot** — Out of v1.
+- **Newsletter / marketing email capture** — Out of v1.
+
+### Platform
+
+- **Native mobile app** — V1 is a mobile-responsive website only.
+- **Offline mode** — Network required.
+- **Dark mode** — Out of v1.
+
+### Analytics & Growth
+
+- **Analytics dashboards, conversion tracking, A/B testing** — Out of v1. Basic hosting analytics only, if any.
+- **SEO optimization beyond basics** — Reasonable page titles and meta tags only; no deep SEO campaign in v1.
