@@ -78,3 +78,56 @@ The following are explicitly out of scope for V1. Listed to prevent assumption, 
 
 - **Analytics dashboards, conversion tracking, A/B testing** — Out of v1. Basic hosting analytics only, if any.
 - **SEO optimization beyond basics** — Reasonable page titles and meta tags only; no deep SEO campaign in v1.
+
+---
+
+## Users / Personas
+
+> **Note:** Persona details marked _[ASSUMPTION]_ are pending confirmation from the
+> business owner. To be validated and updated once owner input is received.
+
+### Primary persona: The Customer
+
+**Profile:**
+An Indian traveler — _[ASSUMPTION: most commonly young couples and families]_ — planning a trip somewhere in India. Browses primarily on a phone. Average tech comfort: can use websites and apps, not a power user.
+
+**Relationship with travel planning:**
+Wants a well-organized trip without assembling transport, stay, food, and sightseeing themselves. _[ASSUMPTION: values convenience and clarity over chasing the absolute cheapest option.]_
+
+**Pain today:**
+Can't discover or evaluate Payanam without calling. No way to see what trips exist, what they cost, or what's included. Hidden-cost anxiety: "what's actually covered in this price?"
+
+**What success looks like for them:**
+
+- Finds a relevant package quickly
+- Understands exactly what's included and what it costs, with no surprises
+- Sends an enquiry in a few taps and gets a callback
+
+### Secondary persona: The Owner (your friend)
+
+**Profile:**
+Runs Payanam Holidays. Currently gets business mainly through friends-of-friends referrals. Not a technical person.
+
+**Pain today:**
+
+- Business is invisible beyond word-of-mouth; can't reach strangers
+- No credible online presence
+- Answers the same basic questions on every call
+- No professional image to point new customers to
+
+**What success looks like for them:**
+
+- A credible website to share with prospects
+- Qualified enquiries arriving with enough info to follow up
+- Less time spent explaining basics; more time closing trips
+- _[Phase 2] Ability to manage packages himself without depending on the developer_
+
+### How customers discover Payanam
+
+_[ASSUMPTION: primarily word-of-mouth / referrals — pending owner confirmation.]_
+
+**Decision (based on current understanding):**
+
+- **Shareability — prioritized in v1.** Clean, readable URLs and good link previews (title, image, price) when a package is shared on WhatsApp/social. Directly serves the referral channel.
+- **SEO basics — included in v1.** Sensible page titles, meta descriptions, mobile-friendliness, fast load, sitemap. Cheap hygiene, done while building.
+- **SEO campaigns (content, ranking, backlinks) — deferred.** Premature for a referral-based business; revisit as the business grows and search becomes a real acquisition channel.
