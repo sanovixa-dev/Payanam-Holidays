@@ -131,3 +131,94 @@ _[ASSUMPTION: primarily word-of-mouth / referrals — pending owner confirmation
 - **Shareability — prioritized in v1.** Clean, readable URLs and good link previews (title, image, price) when a package is shared on WhatsApp/social. Directly serves the referral channel.
 - **SEO basics — included in v1.** Sensible page titles, meta descriptions, mobile-friendliness, fast load, sitemap. Cheap hygiene, done while building.
 - **SEO campaigns (content, ranking, backlinks) — deferred.** Premature for a referral-based business; revisit as the business grows and search becomes a real acquisition channel.
+
+---
+
+## User Stories (V1)
+
+User stories describe specific moments of use. Each maps to one or more Goals and is the unit of work we build and test against.
+
+### Browsing & Discovery
+
+**Story 1 — Land on the homepage**
+As a visitor, I want to immediately understand what Payanam Holidays offers and see trip packages, so that I know I'm in the right place without reading instructions.
+
+_Acceptance criteria:_
+
+- Homepage clearly states what the agency does (organized trip packages).
+- Packages are visible without scrolling far or clicking anything.
+- Works cleanly on mobile.
+
+**Story 2 — Browse all packages**
+As a visitor, I want to see the list of available trip packages, so that I can explore my options.
+
+_Acceptance criteria:_
+
+- Each package shows: destination/title, a photo, price, and duration at a glance.
+- No login required.
+
+**Story 3 — Filter by category**
+As a visitor, I want to filter packages by category (trip type), so that I can quickly find trips relevant to me.
+
+**Story 4 — See regionally relevant packages first**
+As a visitor, I want packages relevant to my region to appear first, so that I see the most relevant trips without searching.
+
+_Acceptance criteria:_
+
+- If location is detectable, regionally relevant packages surface first.
+- If not detectable, a sensible default order is shown.
+- _[Method — IP-based vs manual region pick — decided in Phase 3.]_
+
+### Package Detail
+
+**Story 5 — View full package details**
+As a visitor, I want to open a package and see everything it includes, so that I understand exactly what I'm getting and what it costs.
+
+_Acceptance criteria:_
+
+- Shows: full description, what's included (transport, stay, food, sightseeing, other), price, duration, photos.
+- Pricing is transparent — no hidden-cost ambiguity.
+- A clear, prominent way to enquire.
+
+**Story 6 — Share a package**
+As a visitor, I want to share a package link with friends or family, so that we can decide together.
+
+_Acceptance criteria:_
+
+- Each package has a clean, readable URL.
+- When shared (WhatsApp/social), a preview shows title, image, and price.
+
+### Enquiry
+
+**Story 7 — Submit an enquiry**
+As a visitor interested in a package, I want to submit an enquiry with my details, so that the agency can contact me to plan the trip.
+
+_Acceptance criteria:_
+
+- Form collects the details the owner needs to follow up _[exact fields pending owner confirmation — ASSUMPTION: name, phone, package, travel dates, number of people]._
+- No login required.
+- On submit, I see a clear confirmation ("Thanks, we'll call you shortly").
+- The form is short and low-friction.
+
+**Story 8 — Enquiry reaches the owner**
+As the owner, I want every enquiry delivered to me reliably with all the customer's details, so that I can call them back and close the sale.
+
+_Acceptance criteria:_
+
+- Each submitted enquiry reaches the owner _[delivery method — email/WhatsApp/etc. — pending owner confirmation]._
+- Includes which package, customer contact, and their provided details.
+- No enquiry is silently lost.
+
+### Empty & Error States
+
+**Story 9 — No packages in a filter**
+As a visitor who filtered to a category with no packages, I want a helpful message instead of a blank screen, so that I know to try another category.
+
+**Story 10 — Enquiry submission fails**
+As a visitor whose enquiry fails to send (network/server issue), I want a clear error and my entered details preserved, so that I can retry without re-typing everything.
+
+_Acceptance criteria:_
+
+- On failure, a clear message is shown.
+- Form data is preserved for retry.
+- Submission is atomic — either fully sent or clearly failed, never silently dropped.
