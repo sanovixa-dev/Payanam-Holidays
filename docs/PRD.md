@@ -222,3 +222,68 @@ _Acceptance criteria:_
 - On failure, a clear message is shown.
 - Form data is preserved for retry.
 - Submission is atomic — either fully sent or clearly failed, never silently dropped.
+
+---
+
+## Functional Requirements (V1)
+
+System behaviors required for V1. Each is numbered and maps to Goals and User Stories.
+
+### FR-1: Package Display
+
+- **FR-1.1** The system must display all available packages on a public page without requiring login.
+- **FR-1.2** Each package summary must show: title/destination, primary photo, price, and duration.
+- **FR-1.3** Package content must be loaded from a structured config source (file-based in v1), not hardcoded in components.
+- **FR-1.4** The system must render correctly on screen widths from 360px (small phones) upward.
+
+### FR-2: Filtering & Ordering
+
+- **FR-2.1** The system must allow filtering packages by category (trip type).
+- **FR-2.2** Categories must come from the package config, not be hardcoded in the UI.
+- **FR-2.3** The system must order packages so regionally relevant ones appear first when the visitor's region is determinable.
+- **FR-2.4** If the visitor's region cannot be determined, the system must fall back to a defined default order.
+- **FR-2.5** Region detection method (IP-based vs manual selection) is resolved in Phase 3; the ordering behavior (FR-2.3) holds regardless of method.
+
+### FR-3: Package Detail
+
+- **FR-3.1** Each package must have its own detail view accessible via a unique, readable URL.
+- **FR-3.2** The detail view must show: full description, inclusions (transport, accommodation, food, sightseeing, other), price, duration, and photos.
+- **FR-3.3** The detail view must present a clear, prominent call-to-action to submit an enquiry.
+- **FR-3.4** Pricing must be displayed transparently (what the price covers), avoiding hidden-cost ambiguity.
+
+### FR-4: Shareability
+
+- **FR-4.1** Each package URL must be human-readable (e.g., a slug derived from the package, not an opaque ID).
+- **FR-4.2** Each package page must include social/link-preview metadata (Open Graph tags) so shared links show title, image, and price.
+
+### FR-5: Enquiry Submission
+
+- **FR-5.1** Each package detail view must provide an enquiry form, usable without login.
+- **FR-5.2** The form must collect the fields the owner needs to follow up. _[ASSUMPTION pending owner confirmation: name, phone, package (auto-filled), travel dates, number of people.]_
+- **FR-5.3** The system must validate required fields and a well-formed phone number before submission.
+- **FR-5.4** On successful submission, the system must show a clear confirmation message.
+- **FR-5.5** Enquiry submission must be atomic: either fully delivered or clearly failed — never partially sent or silently dropped.
+- **FR-5.6** On submission failure, the system must show a clear error and preserve the user's entered data for retry.
+
+### FR-6: Enquiry Delivery
+
+- **FR-6.1** Each submitted enquiry must be delivered to the owner. _[ASSUMPTION pending confirmation: delivery via email; channel to be confirmed.]_
+- **FR-6.2** The delivered enquiry must include: which package, customer contact details, and all submitted fields.
+- **FR-6.3** Enquiries must be recorded/stored such that a delivery failure does not result in permanent loss of the enquiry. _(Implementation approach decided in Phase 3 — e.g., store-then-send.)_
+- **FR-6.4** The enquiry endpoint must be rate-limited (IP-based) to prevent spam/abuse.
+- **FR-6.5** Every enquiry must be persisted to storage (a database) before delivery is attempted. Delivery failure must not result in loss of the stored enquiry. _(Store-then-send.)_
+
+### FR-7: Empty & Error States
+
+- **FR-7.1** When a filter yields no packages, the system must show a helpful empty-state message, not a blank screen.
+- **FR-7.2** Network, server, and validation errors must surface clear, user-readable messages — never raw codes or stack traces.
+
+### FR-8: Architecture Constraints
+
+- **FR-8.1** Package content structure must be defined such that a future admin interface (Phase 2) can create/edit/delete packages without changing the rendering code.
+- **FR-8.2** The enquiry-handling logic must be separated from the delivery mechanism, so the delivery channel (email, WhatsApp, etc.) can change without rewriting enquiry handling.
+
+### FR-9: Contact & Credibility
+
+- **FR-9.1** The business phone number must be visible site-wide (e.g., header or persistent element), so visitors who prefer to call can do so without filling a form.
+- **FR-9.2** The site must include an "About / Contact Us" section presenting who the agency is and how to reach them, to establish credibility with first-time visitors.
