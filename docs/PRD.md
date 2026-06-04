@@ -287,3 +287,64 @@ System behaviors required for V1. Each is numbered and maps to Goals and User St
 
 - **FR-9.1** The business phone number must be visible site-wide (e.g., header or persistent element), so visitors who prefer to call can do so without filling a form.
 - **FR-9.2** The site must include an "About / Contact Us" section presenting who the agency is and how to reach them, to establish credibility with first-time visitors.
+
+---
+
+---
+
+## Non-Functional Requirements (V1)
+
+Qualities the system must exhibit, beyond what features it provides.
+
+### NFR-1: Performance
+
+- **NFR-1.1** The homepage must reach interactive state in ≤ 2.5 seconds on a typical mobile connection (4G). First impressions decide whether a visitor stays.
+- **NFR-1.2** Package images must be optimized (compressed, appropriately sized, lazy-loaded) so they don't block page load.
+- **NFR-1.3** Navigating from the package list to a package detail page must feel near-instant (≤ 1 second).
+- **NFR-1.4** The enquiry submission must complete in ≤ 2 seconds under normal conditions.
+
+### NFR-2: Reliability
+
+- **NFR-2.1** The site must achieve ≥ 99% uptime over any rolling 30-day window.
+- **NFR-2.2** Every submitted enquiry must be persisted before delivery is attempted; a delivery failure must never lose the enquiry (per FR-6.5).
+- **NFR-2.3** Enquiry submission must be atomic — fully succeed or clearly fail, never partial or silent. On failure, the user's entered form data must be preserved for retry (per FR-5.6).
+- **NFR-2.4** Errors must be logged with enough context to debug, without leaking customer personal data.
+
+### NFR-3: Usability
+
+- **NFR-3.1** The site must be fully responsive and functional on screen widths from 360px upward, since most visitors are on mobile.
+- **NFR-3.2** Core actions (browse a package, find the phone number, submit an enquiry) must be reachable in ≤ 2 taps from any page.
+- **NFR-3.3** Text must be legible on mobile without zooming; tap targets must be comfortably sized.
+- **NFR-3.4** Error and confirmation messages must be in plain language.
+- **NFR-3.5** The site must work on the latest two stable versions of Chrome, Safari, Firefox, and Edge.
+
+### NFR-4: Credibility & Trust
+
+- **NFR-4.1** The design must look professional and trustworthy — this is a core product goal, not cosmetic. A sketchy-looking site loses customers regardless of package quality.
+- **NFR-4.2** Pricing and inclusions must be presented transparently (no hidden-cost ambiguity), as trust is the primary conversion driver.
+- **NFR-4.3** Contact information (phone, about section) must be easy to find, signaling a real, reachable business.
+
+### NFR-5: Shareability & Discoverability
+
+- **NFR-5.1** Package URLs must be human-readable slugs.
+- **NFR-5.2** Package pages must include Open Graph metadata so shared links render rich previews (title, image, price).
+- **NFR-5.3** SEO basics must be in place: sensible page titles, meta descriptions, a sitemap, and mobile-friendliness. (SEO _campaigns_ are out of scope per Non-Goals.)
+
+### NFR-6: Maintainability
+
+- **NFR-6.1** Code style must be enforced by an automated linter and formatter (ESLint + Prettier).
+- **NFR-6.2** Major architectural decisions must be documented as ADRs in `docs/decisions/`.
+- **NFR-6.3** Package content must be editable via the config source without touching rendering code (per FR-8.1).
+- **NFR-6.4** Since a second (less-experienced) developer may contribute, the codebase must be organized and documented well enough for him to onboard and contribute with guidance.
+
+### NFR-7: Security
+
+- **NFR-7.1** All traffic must use HTTPS.
+- **NFR-7.2** The enquiry endpoint must be rate-limited (IP-based) to prevent spam (per FR-6.4).
+- **NFR-7.3** Enquiry form input must be validated and sanitized to prevent injection and abuse.
+- **NFR-7.4** Customer enquiry data must not be exposed publicly or logged insecurely.
+- **NFR-7.5** Secrets (email service keys, DB credentials) must be stored in environment variables, never committed to git.
+
+### NFR-8: Cost
+
+- **NFR-8.1** Monthly infrastructure cost (hosting + database + email) must remain minimal, targeting under ₹800/month at v1 scale, within the overall budget. im on office now so . its for remember purpose
