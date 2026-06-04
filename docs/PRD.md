@@ -76,7 +76,7 @@ The following are explicitly out of scope for V1. Listed to prevent assumption, 
 
 ### Analytics & Growth
 
-- **Analytics dashboards, conversion tracking, A/B testing** — Out of v1. Basic hosting analytics only, if any.
+- **Analytics dashboards, conversion tracking, A/B testing** — Custom-built analytics, conversion tracking, A/B testing — Out of v1. A ready-made tool (e.g., Plausible/Google Analytics/PostHog) provides basic visitor insights; building our own tracking or dashboard is deferred.
 - **SEO optimization beyond basics** — Reasonable page titles and meta tags only; no deep SEO campaign in v1.
 
 ---
@@ -348,3 +348,62 @@ Qualities the system must exhibit, beyond what features it provides.
 ### NFR-8: Cost
 
 - **NFR-8.1** Monthly infrastructure cost (hosting + database + email) must remain minimal, targeting under ₹800/month at v1 scale, within the overall budget. im on office now so . its for remember purpose
+
+---
+
+## Success Metrics (V1)
+
+Success is measured ~60–90 days after launch. Each metric is observable, not subjective.
+
+### The Headline Metric
+
+- **SM-1: The website generates real business**
+  Within 90 days of launch, the website produces enquiries that the owner converts into at least a few booked trips that he would not have gotten through word-of-mouth alone. If the site brings zero new business, v1 has not succeeded — regardless of how it looks.
+
+### Business Metrics (the owner's view)
+
+- **SM-2: Enquiries are arriving**
+  The site generates a steady flow of enquiries (target to be set with the owner once baseline is known — even 1–2 quality enquiries per week is meaningful for a small agency).
+
+- **SM-3: Enquiry quality**
+  Enquiries arrive with enough information that the owner can act on them (valid phone, clear package interest) — measured as: % of enquiries the owner can actually follow up on, target ≥ 90%.
+
+- **SM-4: Reduced repetitive questions**
+  The owner spends less time on calls explaining basics (price, what's included), because the site answers these upfront. Measured qualitatively via owner feedback.
+
+- **SM-5: Reach beyond word-of-mouth**
+  At least some enquiries come from people outside the owner's existing referral network — proving the site expanded his reach (the core problem from the Problem Statement).
+
+### Customer Experience Metrics
+
+- **SM-6: Enquiry completion**
+  Visitors who start the enquiry form complete it — a low drop-off rate indicates the form is low-friction. Measurable via the basic analytics tool.
+
+- **SM-7: Mobile usability**
+  The site works smoothly for the majority who visit on mobile — no broken layouts, no zoom-required text, no rage-quits. Validated by the owner and a few test users on real phones.
+
+### Technical Metrics
+
+- **SM-8: Uptime**
+  ≥ 99% uptime over any rolling 30-day window (mirrors NFR-2.1).
+
+- **SM-9: Zero lost enquiries**
+  Zero incidents where a submitted enquiry was lost without reaching the owner. Non-negotiable (per FR-6.5 store-then-send).
+
+- **SM-10: Performance targets met**
+  Homepage and page-navigation speeds meet NFR-1 targets on real mobile connections.
+
+### How metrics will be measured
+
+For v1, lightweight only:
+
+- **Enquiries:** counted directly (each one is stored, per FR-6.5).
+- **Owner feedback:** the owner reports on lead quality, reduced repetitive questions, and any new business — gathered via a simple check-in at 30 and 90 days.
+- **Manual testing:** real-phone testing for mobile usability before launch.
+- Custom-built analytics and dashboards deferred; only the ready-made tool is used in v1.
+- **Basic analytics tool:** a ready-made tool (e.g., Plausible or Google Analytics) provides visitor counts, top-viewed packages, traffic sources, and rough enquiry-conversion insight for both the builder and the owner.
+
+### Anti-metrics (what we will NOT optimize for)
+
+- **Vanity traffic** — raw visitor count means nothing if it doesn't produce enquiries. We care about _qualified enquiries_, not page views.
+- **Time on site** — a visitor who finds a package, enquires, and leaves in 3 minutes is a _success_, not a failure. (Same low-mental-energy philosophy as Kizo-Corpus.)
