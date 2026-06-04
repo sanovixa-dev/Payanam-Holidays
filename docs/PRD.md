@@ -440,3 +440,50 @@ For v1, lightweight only:
 - **OQ-17** Admin panel
 - **OQ-18** Login + form pre-fill
 - **OQ-19** SEO campaign
+
+---
+
+## Future Versions / Out of Scope
+
+V1 ships a lean site: browse packages → submit enquiry → owner calls back. The following are captured to sequence future work and clarify what the architecture seams (FR-8) must accommodate.
+
+### V2 — Admin Panel (the owner's independence)
+
+The most important next step: let the owner manage packages himself without depending on the developer.
+
+- Owner login (secure authentication for the owner/team).
+- Create, edit, delete packages through a simple interface — no code, no config-file editing.
+- Upload and manage package photos.
+- Built on the config/data structure established in v1 (per FR-8.1), so rendering code doesn't change.
+- Same low-mental-energy philosophy applied to the owner: adding a package should feel like filling a short form, not configuring software.
+
+### V3 — Customer Accounts
+
+- Customer login (optional — browsing/enquiry still work without it).
+- Enquiry form pre-fills for logged-in customers (per the deferred Story).
+- Enquiry history for returning customers.
+
+### V4+ — Conversion & Growth (as the business grows)
+
+- Online payments / UPI (only if the business actually needs website-based payment; current flow closes by call).
+- Booking confirmation, availability, and trip management.
+- SEO campaign — content, keywords, ranking strategy (basics already in v1).
+- WhatsApp integration for enquiry delivery and/or customer updates.
+- Customer reviews / testimonials system.
+- Free-text search (once package count makes filtering insufficient).
+- Multi-language (e.g., Tamil) support.
+
+### Permanently Out of Scope
+
+- **Becoming a generic OTA (MakeMyTrip clone)** — Payanam is a curated agency, not a mass-market booking aggregator. Competing on inventory volume is not the goal.
+- **Engagement-driven dark patterns** — fake urgency ("2 seats left!"), manipulative countdowns, spam notifications. Contradicts the trust-first, low-mental-energy philosophy.
+- **Selling customer data** — enquiry data belongs to the business and the customer, never sold or shared with third parties.
+
+### Roadmap Sequence
+
+```
+v1   →  Browse + enquiry site (current build)
+v2   →  Admin panel (owner manages packages independently)
+v3   →  Customer accounts + pre-fill
+v4+  →  Payments, booking, SEO campaign, WhatsApp, reviews — as the business grows
+```
