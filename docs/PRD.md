@@ -407,3 +407,36 @@ For v1, lightweight only:
 
 - **Vanity traffic** — raw visitor count means nothing if it doesn't produce enquiries. We care about _qualified enquiries_, not page views.
 - **Time on site** — a visitor who finds a package, enquires, and leaves in 3 minutes is a _success_, not a failure. (Same low-mental-energy philosophy as Kizo-Corpus.)
+
+## Open Questions
+
+### Resolved (formalized as ADRs in Phase 3)
+
+- ~~OQ-1~~ Frontend stack → **Vite + React + TypeScript** ✅
+- ~~OQ-2~~ Backend needed → **Yes (Node + Express)** ✅
+- ~~OQ-3~~ Database → **PostgreSQL** ✅
+- ~~OQ-4~~ Hosting → **Vercel + Railway** ✅
+- ~~OQ-5~~ Email → **Resend** ✅
+- ~~OQ-6~~ Analytics → **Google Analytics** ✅
+- ~~OQ-7~~ Geo-detection → **IP-based** ✅
+- ~~OQ-13~~ Domain → **payanamholidays, register at launch** ✅
+- ~~OQ-14~~ Backups → **Railway managed daily** ✅
+
+### Still Open — Pending Owner Input (don't block design)
+
+- **OQ-8** Enquiry form fields
+- **OQ-9** Delivery channel
+- **OQ-10** Category list
+- **OQ-11** Branding
+- **OQ-12** Package content
+
+### Still Open — Resolve Before Launch
+
+- **OQ-15** Monitoring
+- **OQ-16** Privacy note
+
+### Deferred (Phase 2+)
+
+- **OQ-17** Admin panel
+- **OQ-18** Login + form pre-fill
+- **OQ-19** SEO campaign
