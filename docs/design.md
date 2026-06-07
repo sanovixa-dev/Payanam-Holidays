@@ -17,34 +17,36 @@ keeps the site fast, cheap, and simple.
 
 ### Component Diagram
 
-User (phone browser)
-│ HTTPS
-▼
-Frontend (Vercel) — React + TypeScript, built with Vite
-• Homepage, package list, category filters
-• Package detail pages
-• Enquiry form
-• About / Contact section
-• Packages read from a bundled CONFIG FILE (not the database, in v1)
-• Loads Google Analytics for visitor tracking
-• Uses a Geo-IP service to detect region for "show local first" ordering
-│
-│ HTTPS — POST /api/enquiries (this is the ONLY call to the backend)
-▼
+### Updated Component Diagram (revised in 3c — owner auth added)
+
+````
+User (phone browser)                    Owner (browser)
+   │ HTTPS                                  │ HTTPS
+   │ browse + submit enquiry                │ log in + view enquiries
+   ▼                                        ▼
+Frontend (Vercel) — React + TypeScript
+   • Public: homepage, packages, detail pages, enquiry form, about/contact
+   • Owner-only: login page, read-only enquiry dashboard
+   • Packages from config file; loads Google Analytics; Geo-IP for ordering
+   │
+   │  HTTPS — API calls
+   ▼
 Backend (Railway) — Node + Express
-• Receives the enquiry submission
-• Validates and sanitizes the input
-• Rate-limits by IP (spam protection)
-• Performs STORE-THEN-SEND:
-│
-├─► Database (Railway PostgreSQL)
-│ • enquiries table (includes a delivery_status column)
-│ • The enquiry is saved FIRST, before any delivery is attempted
-│
-└─► Delivery (Resend email, with a tap-to-WhatsApp link inside the email)
-• Attempted only AFTER the enquiry is safely stored
-• On success → delivery_status set to 'sent'
-• On failure → delivery_status set to 'failed' (enquiry is never lost)
+   • POST /api/enquiries  (public)  — validate, rate-limit, store-then-send
+   • POST /api/login      (public)  — owner login, returns JWT
+   • GET  /api/enquiries  (owner)   — returns all enquiries (JWT required)
+   • GET  /api/health     (public)  — monitoring
+   • STORE-THEN-SEND with email RETRY before marking failed
+   │
+   ├─► Database (Railway PostgreSQL)
+   │     • enquiries table (with delivery_status)
+   │     • owner credentials (single owner login)
+   │
+   └─► Delivery (Resend email + tap-to-WhatsApp link)
+         • Retries a few times before delivery_status = 'failed'
+         • Attempted only AFTER the enquiry is safely stored
+         • On success → delivery_status set to 'sent'
+         • On failure → delivery_status set to 'failed' (enquiry is never lost)
 
 ### Key Decisions (v1)
 
@@ -110,7 +112,7 @@ follows this shape:
   ],
   heroPhoto: "/images/kerala-hero.jpg"    // main image: card + share preview
 }
-```
+````
 
 **Key field reasoning:**
 
@@ -189,3 +191,94 @@ delivered_at TIMESTAMPTZ when delivery succeeded (UTC); nullable
   price = number (computed with).
 - **Structure enables UX** — `inclusions` as an object, not a blob.
 - **Placeholder as guidance** — the empty state of the message box teaches the user.
+
+### Part 3 — Owner (authentication, added in 3c)
+
+A minimal table for the single owner login. (In v2 this can extend to multiple
+admin users.)
+
+Table: owners
+Column Type Notes
+──────────────────────────────────────────────────────────────
+id SERIAL primary key
+email TEXT owner's login email (unique)
+password_hash TEXT bcrypt hash — never plaintext
+created_at TIMESTAMPTZ when the account was created (UTC)
+
+Note: in v1 there is one owner. The enquiry dashboard reads from the existing
+`enquiries` table; this `owners` table exists only for login.
+
+## 3c. API Design
+
+### Endpoints
+
+| Method | Path           | Purpose                   | Auth        |
+| ------ | -------------- | ------------------------- | ----------- |
+| POST   | /api/enquiries | Submit an enquiry         | Public      |
+| GET    | /api/enquiries | Owner views all enquiries | Owner (JWT) |
+| POST   | /api/login     | Owner login, returns JWT  | Public      |
+| GET    | /api/health    | Server health check       | Public      |
+
+(No GET /api/packages — packages are served from the frontend config file in v1.)
+
+### POST /api/enquiries (public)
+
+Request body:
+
+```json
+{
+  "name": "Ravi Kumar",
+  "phone": "+91 9876543210",
+  "packageId": "kerala-backwaters-5d",
+  "travelDates": "mid-July, flexible",
+  "numPeople": 2,
+  "message": "Vegetarian food, need 2 rooms"
+}
+```
+
+Responses:
+
+- 201 Created → { success: true, message: "Enquiry received..." }
+- 400 Bad Request → invalid/missing fields (frontend keeps form data for retry)
+- 429 Too Many Requests → rate limit hit
+- 500 Internal Server Error → unexpected failure (frontend keeps form data)
+
+Internal logic flow:
+
+Customer confirmation copy:
+"Thanks! We'll call you shortly. Prefer to talk now? Call [number]."
+
+### POST /api/login (public)
+
+Request body:
+
+```json
+{ "email": "owner@payanam.com", "password": "..." }
+```
+
+Responses:
+
+- 200 OK → { success: true, token: "<JWT>" } (frontend stores token)
+- 401 Unauthorized → wrong email/password
+- 429 Too Many Requests → too many login attempts (brute-force protection)
+
+### GET /api/enquiries (owner only)
+
+- Requires a valid JWT (sent in the request).
+- Backend verifies the token before returning anything.
+- Returns the list of all enquiries with their fields and delivery_status.
+- Responses:
+  - 200 OK → { enquiries: [...] }
+  - 401 Unauthorized → missing/invalid token
+
+### GET /api/health (public)
+
+- 200 OK → { status: "ok" } (for uptime monitoring)
+
+### Design notes
+
+- Store-then-send with retry: storage is the source of truth; delivery is a
+  follow-up action that retries before giving up. No enquiry is ever lost.
+- Order of checks (rate-limit → validate → store → deliver) fails fast and cheap,
+  doing expensive work only when input is clean.
+- The owner enquiry dashboard is read-only: GET only, no package mutations in v1.

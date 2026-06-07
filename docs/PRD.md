@@ -49,7 +49,7 @@ The following are explicitly out of scope for V1. Listed to prevent assumption, 
 
 ### Accounts & Admin
 
-- **Customer login / accounts** — Browsing and enquiry both work without login. Deferred to Phase 2.
+- **Customer login / accounts** — Customers browse and enquire without login; customer accounts are deferred to Phase 2. (Note: an _owner_ login exists in v1, but only to access the read-only enquiry dashboard — see FR-10.)
 - **Form pre-fill for logged-in users** — Depends on login; deferred to Phase 2.
 - **Admin panel for the owner to add/edit/delete packages** — Deferred to Phase 2. In v1, packages are managed via config file by the developer.
 
@@ -288,7 +288,14 @@ System behaviors required for V1. Each is numbered and maps to Goals and User St
 - **FR-9.1** The business phone number must be visible site-wide (e.g., header or persistent element), so visitors who prefer to call can do so without filling a form.
 - **FR-9.2** The site must include an "About / Contact Us" section presenting who the agency is and how to reach them, to establish credibility with first-time visitors.
 
----
+### FR-10: Owner Authentication & Enquiry Dashboard (added in design phase)
+
+- **FR-10.1** The system must provide an owner login using email and password.
+- **FR-10.2** Owner passwords must be stored hashed (bcrypt, cost factor ≥ 10), never plaintext.
+- **FR-10.3** On successful login, the system must issue a session token (JWT) used to access protected areas.
+- **FR-10.4** The system must provide a read-only enquiry dashboard, accessible only to the authenticated owner, listing all enquiries with their details and delivery status.
+- **FR-10.5** The enquiry dashboard is read-only in v1: the owner can view enquiries but cannot create, edit, or delete packages. (Package management remains a Phase 2 admin feature.)
+- **FR-10.6** Email delivery of an enquiry must be retried a few times before being marked `delivery_status = 'failed'`. A stored enquiry is never lost regardless of delivery outcome.
 
 ---
 
@@ -344,6 +351,8 @@ Qualities the system must exhibit, beyond what features it provides.
 - **NFR-7.3** Enquiry form input must be validated and sanitized to prevent injection and abuse.
 - **NFR-7.4** Customer enquiry data must not be exposed publicly or logged insecurely.
 - **NFR-7.5** Secrets (email service keys, DB credentials) must be stored in environment variables, never committed to git.
+- **NFR-7.6** Owner authentication must follow the same security posture as the rest of the system: passwords hashed with bcrypt, all auth traffic over HTTPS, session tokens (JWT) signed and validated on every request to protected routes.
+- **NFR-7.7** The enquiry dashboard must verify the requester is the authenticated owner before returning any enquiry data; customer enquiry data must never be exposed to unauthenticated requests.
 
 ### NFR-8: Cost
 
@@ -452,6 +461,9 @@ V1 ships a lean site: browse packages → submit enquiry → owner calls back. T
 The most important next step: let the owner manage packages himself without depending on the developer.
 
 - Owner login (secure authentication for the owner/team).
+  > Note: v1 already includes owner login and a _read-only_ enquiry dashboard.
+  > V2 extends this same login into a full admin panel (create/edit/delete packages,
+  > manage photos), plus the daily digest email.
 - Create, edit, delete packages through a simple interface — no code, no config-file editing.
 - Upload and manage package photos.
 - Built on the config/data structure established in v1 (per FR-8.1), so rendering code doesn't change.
