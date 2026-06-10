@@ -12,7 +12,7 @@
 
 Payanam is "mostly static with one dynamic action." Browsing the site (about 95% of
 what users do — viewing packages, filtering, reading details) happens entirely in the
-frontend and needs no backend. Only submitting an enquiry touches the backend. This
+frontend and needs no backend. Only submitting an enquiry touches the backend.business owners personal login with enquiry list touches the backend. This
 keeps the site fast, cheap, and simple.
 
 ### Component Diagram
@@ -244,6 +244,17 @@ Responses:
 - 500 Internal Server Error → unexpected failure (frontend keeps form data)
 
 Internal logic flow:
+
+Internal logic flow:
+
+1. Rate-limit check (by IP) → if exceeded, respond 429, stop
+2. Validate & sanitize input → if invalid, respond 400, stop
+3. STORE enquiry (delivery_status='pending', created_at=now UTC)
+   → if DB write fails, respond 500, stop (atomic, nothing half-saved)
+4. Respond 201 immediately (customer doesn't wait for the email to send)
+5. DELIVER via email (Resend) WITH RETRY:
+   → success → delivery_status='sent', delivered_at=now
+   → fails after retries → delivery_status='failed' (enquiry safe in DB)
 
 Customer confirmation copy:
 "Thanks! We'll call you shortly. Prefer to talk now? Call [number]."
