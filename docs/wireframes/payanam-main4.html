@@ -1,0 +1,1225 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Payanam Holidays — Wireframes v1</title>
+    <style>
+      :root {
+        --green-btn: #1d9e75;
+        --green-text: #0f6e56;
+        --green-deep: #04342c;
+        --hero-tint: #e1f5ee;
+        --section-bg: #f2faf7;
+        --card-border: #c5e5d9;
+        --ink: #1a2520;
+        --muted: #4a5a54; /* darkened secondary text — readable now */
+        --faint: #6b7b74; /* least-important text, still legible */
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+          Arial, sans-serif;
+        background: #10201b;
+        color: #fff;
+        padding: 34px 16px 60px;
+        -webkit-font-smoothing: antialiased;
+      }
+      .page-head {
+        text-align: center;
+        max-width: 760px;
+        margin: 0 auto 36px;
+      }
+      .page-head h1 {
+        font-size: 24px;
+        font-weight: 600;
+        letter-spacing: -0.3px;
+      }
+      .page-head p {
+        font-size: 14px;
+        color: #9fe1cb;
+        margin-top: 8px;
+        line-height: 1.6;
+      }
+      .grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 34px;
+        justify-content: center;
+        align-items: flex-start;
+        max-width: 1500px;
+        margin: 0 auto;
+      }
+      .frame-wrap {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+      }
+      .frame-label {
+        font-size: 13px;
+        font-weight: 600;
+        color: #b6e8d6;
+        letter-spacing: 0.2px;
+      }
+      .phone {
+        width: 340px;
+        background: #fff;
+        border-radius: 22px;
+        overflow: hidden;
+        box-shadow: 0 14px 40px rgba(0, 0, 0, 0.45);
+        color: var(--ink);
+      }
+
+      /* shared bits */
+      .pill {
+        font-size: 12px;
+        font-weight: 600;
+        padding: 6px 13px;
+        border-radius: 999px;
+        white-space: nowrap;
+      }
+      .pill-solid {
+        background: var(--green-btn);
+        color: #fff;
+      }
+      .pill-out {
+        border: 1px solid var(--green-btn);
+        background: #fff;
+        color: var(--green-text);
+      }
+      .btn {
+        font-size: 13px;
+        font-weight: 600;
+        color: #fff;
+        background: var(--green-btn);
+        border-radius: 8px;
+        padding: 7px 14px;
+        display: inline-block;
+      }
+      .btn-block {
+        display: block;
+        text-align: center;
+        font-size: 15px;
+        padding: 14px;
+        border-radius: 8px;
+      }
+      .icon {
+        width: 1em;
+        height: 1em;
+        vertical-align: -2px;
+        stroke: currentColor;
+        fill: none;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        display: inline-block;
+      }
+      .callus {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 12px;
+        font-weight: 600;
+        background: var(--green-btn);
+        color: #fff;
+        border-radius: 8px;
+        padding: 7px 12px;
+      }
+
+      .head-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 13px 15px;
+        background: #fff;
+      }
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .logo-mark {
+        position: relative;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: var(--green-text);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        color: #fff;
+      }
+      .logo-mark .shine {
+        position: absolute;
+        top: -6px;
+        left: -10px;
+        width: 14px;
+        height: 34px;
+        background: rgba(255, 255, 255, 0.28);
+        transform: rotate(25deg);
+      }
+      .brand-name {
+        font-size: 16px;
+        font-weight: 600;
+        color: var(--green-deep);
+      }
+
+      .hero {
+        background: var(--hero-tint);
+        padding: 26px 18px 28px;
+        text-align: center;
+      }
+      .hero h2 {
+        font-size: 21px;
+        font-weight: 600;
+        color: var(--green-deep);
+        line-height: 1.3;
+      }
+      .hero p {
+        font-size: 13px;
+        color: var(--green-text);
+        margin-top: 6px;
+      }
+
+      .section {
+        background: var(--section-bg);
+      }
+      .filters {
+        display: flex;
+        gap: 8px;
+        padding: 14px 15px 4px;
+        overflow: hidden;
+      }
+      .nearby {
+        margin: 14px 15px 8px;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--green-text);
+      }
+      .cards {
+        padding: 0 15px 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .card {
+        background: #fff;
+        border: 1px solid var(--card-border);
+        border-radius: 12px;
+        overflow: hidden;
+      }
+      .card-img {
+        height: 132px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .card-img.kerala {
+        background: linear-gradient(160deg, #5dcaa5, #1d9e75 45%, #0f6e56);
+      }
+      .card-img.goa {
+        background: linear-gradient(160deg, #85b7eb, #378add 45%, #185fa5);
+      }
+      .card-img .ph {
+        width: 34px;
+        height: 34px;
+        color: rgba(255, 255, 255, 0.92);
+        stroke-width: 1.6;
+      }
+      .share-fab {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--green-text);
+      }
+      .share-fab .icon {
+        width: 15px;
+        height: 15px;
+      }
+      .card-body {
+        padding: 12px 13px;
+      }
+      .card-title {
+        font-size: 16px;
+        font-weight: 600;
+        color: var(--green-deep);
+        margin-bottom: 4px;
+      }
+      .card-meta {
+        font-size: 12px;
+        color: var(--muted);
+        margin-bottom: 10px;
+      }
+      .price-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .price {
+        font-size: 19px;
+        font-weight: 600;
+        color: var(--green-text);
+      }
+      .price small {
+        font-size: 12px;
+        color: var(--muted);
+        font-weight: 400;
+      }
+
+      .footer {
+        background: var(--green-deep);
+        padding: 18px 15px;
+        text-align: center;
+      }
+      .footer h3 {
+        font-size: 14px;
+        font-weight: 600;
+        color: #fff;
+      }
+      .footer p {
+        font-size: 12px;
+        color: #b6e8d6;
+        margin: 4px 0 10px;
+      }
+      .footer .contact {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--green-deep);
+        background: #fff;
+        border-radius: 8px;
+        padding: 6px 12px;
+      }
+
+      /* detail page */
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 15px;
+        background: #fff;
+        border-bottom: 1px solid var(--card-border);
+      }
+      .back {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--green-text);
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+      }
+      .share-out {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        border: 1px solid var(--card-border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--green-text);
+      }
+      .share-out .icon {
+        width: 15px;
+        height: 15px;
+      }
+      .hero-photo {
+        height: 170px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(160deg, #5dcaa5, #1d9e75 45%, #0f6e56);
+      }
+      .hero-photo .ph {
+        width: 42px;
+        height: 42px;
+        color: rgba(255, 255, 255, 0.92);
+        stroke-width: 1.6;
+      }
+      .detail-pad {
+        padding: 16px 16px 0;
+      }
+      .d-title {
+        font-size: 19px;
+        font-weight: 600;
+        color: var(--green-deep);
+        line-height: 1.3;
+        margin-bottom: 5px;
+      }
+      .d-meta {
+        font-size: 12px;
+        color: var(--muted);
+        margin-bottom: 15px;
+      }
+      .price-block {
+        background: var(--section-bg);
+        border-radius: 8px;
+        padding: 13px 14px;
+        margin-bottom: 18px;
+      }
+      .price-block .top {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+      }
+      .price-block .big {
+        font-size: 23px;
+        font-weight: 600;
+        color: var(--green-text);
+      }
+      .badge-inc {
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--green-text);
+        background: var(--hero-tint);
+        padding: 4px 9px;
+        border-radius: 999px;
+      }
+      .price-block .per {
+        font-size: 12px;
+        color: var(--muted);
+        margin-top: 4px;
+      }
+      .desc {
+        font-size: 13px;
+        color: var(--ink);
+        line-height: 1.7;
+        margin-bottom: 18px;
+      }
+      .inc-title {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--green-deep);
+        margin-bottom: 12px;
+      }
+      .inc-list {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        margin-bottom: 20px;
+      }
+      .inc-row {
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+      }
+      .inc-row .icon {
+        width: 19px;
+        height: 19px;
+        color: var(--green-btn);
+        margin-top: 1px;
+        flex: none;
+      }
+      .inc-row .lab {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--ink);
+      }
+      .inc-row .sub {
+        font-size: 12px;
+        color: var(--muted);
+        line-height: 1.5;
+      }
+      .gallery {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+      .thumb {
+        flex: 1;
+        height: 58px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: rgba(255, 255, 255, 0.9);
+      }
+      .thumb .icon {
+        width: 20px;
+        height: 20px;
+        stroke-width: 1.6;
+      }
+      .thumb.a {
+        background: linear-gradient(160deg, #9fe1cb, #1d9e75);
+      }
+      .thumb.b {
+        background: linear-gradient(160deg, #5dcaa5, #0f6e56);
+      }
+      .thumb.c {
+        background: linear-gradient(160deg, #85b7eb, #378add);
+      }
+      .chev {
+        color: var(--green-text);
+        flex: none;
+      }
+      .sticky-cta {
+        padding: 15px 16px 17px;
+        border-top: 1px solid var(--card-border);
+        background: var(--section-bg);
+      }
+      .sticky-note {
+        margin-top: 10px;
+        text-align: center;
+        font-size: 12px;
+        color: var(--green-text);
+      }
+      .sticky-tag {
+        display: inline-block;
+        font-size: 10px;
+        font-weight: 600;
+        color: var(--green-text);
+        background: var(--hero-tint);
+        padding: 3px 8px;
+        border-radius: 999px;
+        margin-bottom: 10px;
+      }
+
+      /* form */
+      .form-pad {
+        padding: 16px 16px 18px;
+      }
+      .form-h {
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--green-deep);
+      }
+      .form-sub {
+        font-size: 13px;
+        color: var(--muted);
+        margin: 3px 0 18px;
+      }
+      .label {
+        display: block;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--green-deep);
+        margin-bottom: 5px;
+      }
+      .label .opt {
+        color: var(--muted);
+        font-weight: 400;
+      }
+      .field {
+        height: 38px;
+        border: 1px solid var(--card-border);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        padding: 0 11px;
+        margin-bottom: 14px;
+      }
+      .field .placeholder {
+        font-size: 13px;
+        color: var(--faint);
+      }
+      .field.prefilled {
+        background: var(--section-bg);
+        justify-content: space-between;
+        margin-bottom: 5px;
+      }
+      .field.prefilled .val {
+        font-size: 13px;
+        color: var(--green-deep);
+        font-weight: 600;
+      }
+      .field.prefilled .icon {
+        width: 14px;
+        height: 14px;
+        color: var(--green-text);
+      }
+      .hint {
+        font-size: 11px;
+        color: var(--faint);
+        margin-bottom: 14px;
+      }
+      .row2 {
+        display: flex;
+        gap: 10px;
+      }
+      .row2 .col {
+        flex: 1;
+      }
+      .row2 .col.small {
+        width: 96px;
+        flex: none;
+      }
+      .textarea {
+        min-height: 64px;
+        border: 1px solid var(--card-border);
+        border-radius: 8px;
+        padding: 9px 11px;
+        margin-bottom: 18px;
+      }
+      .textarea .placeholder {
+        font-size: 12px;
+        color: var(--faint);
+        line-height: 1.5;
+      }
+
+      /* dashboard */
+      .dash-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 13px 15px;
+        background: var(--green-deep);
+      }
+      .dash-head .t {
+        font-size: 16px;
+        font-weight: 600;
+        color: #fff;
+      }
+      .dash-head .logout {
+        font-size: 12px;
+        font-weight: 600;
+        color: #b6e8d6;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+      }
+      .dash-body {
+        padding: 14px;
+        background: var(--section-bg);
+        display: flex;
+        flex-direction: column;
+        gap: 13px;
+      }
+      .enq {
+        background: #fff;
+        border: 1px solid var(--card-border);
+        border-radius: 12px;
+        padding: 14px;
+      }
+      .enq.failed {
+        border: 1.5px solid #e89393;
+      }
+      .enq-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 9px;
+      }
+      .enq-phone {
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--green-deep);
+      } /* phone leads: on top + bold */
+      .enq-name {
+        font-size: 13px;
+        color: var(--ink);
+        margin-top: 2px;
+      } /* name: medium, not quiet */
+      .stat {
+        font-size: 11px;
+        font-weight: 600;
+        padding: 4px 10px;
+        border-radius: 999px;
+        white-space: nowrap;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+      }
+      .stat.sent {
+        color: var(--green-text);
+        background: var(--hero-tint);
+      }
+      .stat.pending {
+        color: #854f0b;
+        background: #faeeda;
+      }
+      .stat.failed {
+        color: #a32d2d;
+        background: #fcebeb;
+      }
+      .stat .icon {
+        width: 11px;
+        height: 11px;
+      }
+      .enq-line {
+        font-size: 12px;
+        color: var(--muted);
+        margin-bottom: 4px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+      .enq-line .icon {
+        width: 12px;
+        height: 12px;
+        color: var(--muted);
+        flex: none;
+      }
+      .enq-msg {
+        font-size: 12px;
+        color: var(--ink);
+        background: var(--section-bg);
+        padding: 8px 10px;
+        border-radius: 8px;
+        line-height: 1.5;
+        margin: 6px 0 8px;
+      }
+      .enq-flag {
+        font-size: 12px;
+        color: #a32d2d;
+        background: #fcebeb;
+        padding: 8px 10px;
+        border-radius: 8px;
+        line-height: 1.5;
+        margin: 6px 0 8px;
+        display: flex;
+        align-items: flex-start;
+        gap: 6px;
+      }
+      .enq-flag .icon {
+        width: 13px;
+        height: 13px;
+        flex: none;
+        margin-top: 1px;
+      }
+      .enq-time {
+        font-size: 11px;
+        color: var(--faint);
+      }
+
+      .legend {
+        max-width: 760px;
+        margin: 40px auto 0;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 14px;
+        padding: 20px 22px;
+      }
+      .legend h4 {
+        font-size: 14px;
+        font-weight: 600;
+        color: #b6e8d6;
+        margin-bottom: 12px;
+      }
+      .legend ul {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 9px;
+      }
+      .legend li {
+        font-size: 13px;
+        color: #d6f0e6;
+        line-height: 1.5;
+        padding-left: 18px;
+        position: relative;
+      }
+      .legend li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 7px;
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--green-btn);
+      }
+      .legend .note {
+        margin-top: 14px;
+        font-size: 12px;
+        color: #8fbfaf;
+        line-height: 1.6;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- icon sprite -->
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+      <symbol id="i-phone" viewBox="0 0 24 24">
+        <path
+          d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2"
+        />
+      </symbol>
+      <symbol id="i-share" viewBox="0 0 24 24">
+        <circle cx="6" cy="12" r="3" />
+        <circle cx="18" cy="6" r="3" />
+        <circle cx="18" cy="18" r="3" />
+        <path d="M8.7 10.7l6.6 -3.4" />
+        <path d="M8.7 13.3l6.6 3.4" />
+      </symbol>
+      <symbol id="i-plane" viewBox="0 0 24 24">
+        <path
+          d="M16 10h4a2 2 0 0 1 0 4h-4l-4 7h-3l2 -7h-4l-2 2h-3l2 -4l-2 -4h3l2 2h4l-2 -7h3z"
+        />
+      </symbol>
+      <symbol id="i-clock" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="9" />
+        <path d="M12 7v5l3 3" />
+      </symbol>
+      <symbol id="i-pin" viewBox="0 0 24 24">
+        <path d="M12 21s-6 -5.686 -6 -10a6 6 0 1 1 12 0c0 4.314 -6 10 -6 10z" />
+        <circle cx="12" cy="11" r="2" />
+      </symbol>
+      <symbol id="i-photo" viewBox="0 0 24 24">
+        <rect x="4" y="4" width="16" height="16" rx="3" />
+        <circle cx="15" cy="9" r="1.4" />
+        <path d="M4 15l4 -4c.9 -.9 2.1 -.9 3 0l5 5" />
+        <path d="M14 14l1 -1c.9 -.9 2.1 -.9 3 0l2 2" />
+      </symbol>
+      <symbol id="i-car" viewBox="0 0 24 24">
+        <circle cx="7" cy="17" r="2" />
+        <circle cx="17" cy="17" r="2" />
+        <path d="M5 17h-2v-6l2 -5h9l4 5h1a2 2 0 0 1 2 2v4h-2m-4 0h-6" />
+      </symbol>
+      <symbol id="i-bed" viewBox="0 0 24 24">
+        <path d="M3 7v11" />
+        <path d="M21 18v-7a2 2 0 0 0 -2 -2h-8v5" />
+        <path d="M3 12h10" />
+        <circle cx="7" cy="10" r="1" />
+      </symbol>
+      <symbol id="i-food" viewBox="0 0 24 24">
+        <path d="M4 3v6a2 2 0 0 0 4 0v-6" />
+        <path d="M6 9v12" />
+        <path d="M17 3c-1.5 0 -2.5 2 -2.5 5s1 4 2.5 4v9" />
+      </symbol>
+      <symbol id="i-map" viewBox="0 0 24 24">
+        <path d="M18 6l-3 -1l-6 2l-6 -2v13l6 2l6 -2l3 1z" />
+        <path d="M9 7v13" />
+        <path d="M15 5v13" />
+      </symbol>
+      <symbol id="i-plus" viewBox="0 0 24 24">
+        <path d="M12 5v14" />
+        <path d="M5 12h14" />
+      </symbol>
+      <symbol id="i-check" viewBox="0 0 24 24">
+        <path d="M5 12l5 5l10 -10" />
+      </symbol>
+      <symbol id="i-alert" viewBox="0 0 24 24">
+        <path d="M12 9v4" />
+        <path d="M12 17h.01" />
+        <path
+          d="M10.24 3.96l-8.42 14.06a2 2 0 0 0 1.7 2.98h16.85a2 2 0 0 0 1.7 -2.98l-8.42 -14.06a2 2 0 0 0 -3.4 0z"
+        />
+      </symbol>
+      <symbol id="i-back" viewBox="0 0 24 24">
+        <path d="M5 12h14" />
+        <path d="M5 12l6 6" />
+        <path d="M5 12l6 -6" />
+      </symbol>
+      <symbol id="i-pencil" viewBox="0 0 24 24">
+        <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
+        <path d="M13.5 6.5l4 4" />
+      </symbol>
+      <symbol id="i-chev" viewBox="0 0 24 24">
+        <path d="M9 6l6 6l-6 6" />
+      </symbol>
+      <symbol id="i-logout" viewBox="0 0 24 24">
+        <path
+          d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2"
+        />
+        <path d="M9 12h12" />
+        <path d="M18 9l3 3l-3 3" />
+      </symbol>
+    </svg>
+
+    <div class="page-head">
+      <h1>Payanam Holidays — Wireframes (v1)</h1>
+      <p>
+        Mobile-first layout. Colours and copy are locked; package photos and
+        content are placeholders until the real ones come in. This is structure,
+        not final art.
+      </p>
+    </div>
+
+    <div class="grid">
+      <!-- ============ SCREEN 1: HOMEPAGE ============ -->
+      <div class="frame-wrap">
+        <div class="frame-label">1 · Homepage</div>
+        <div class="phone">
+          <div class="head-bar">
+            <span class="brand">
+              <span class="logo-mark"
+                ><span class="shine"></span
+                ><svg class="icon" style="width: 17px; height: 17px">
+                  <use href="#i-plane" /></svg
+              ></span>
+              <span class="brand-name">Payanam Holidays</span>
+            </span>
+            <span class="callus"
+              ><svg class="icon" style="width: 13px; height: 13px">
+                <use href="#i-phone" />
+              </svg>
+              Call us</span
+            >
+          </div>
+          <div class="hero">
+            <h2>Go pack your things.<br />We'll handle the rest.</h2>
+            <p>Real trips, honest prices, zero hassle.</p>
+          </div>
+          <div class="section">
+            <div class="filters">
+              <span class="pill pill-solid">All</span>
+              <span class="pill pill-out">Family</span>
+              <span class="pill pill-out">Couples</span>
+              <span class="pill pill-out">Group</span>
+            </div>
+            <p class="nearby">
+              <svg class="icon" style="width: 13px; height: 13px">
+                <use href="#i-pin" />
+              </svg>
+              Popular near you
+            </p>
+            <div class="cards">
+              <div class="card">
+                <div class="card-img kerala">
+                  <svg class="ph"><use href="#i-photo" /></svg>
+                  <span class="share-fab"
+                    ><svg class="icon"><use href="#i-share" /></svg
+                  ></span>
+                </div>
+                <div class="card-body">
+                  <div class="card-title">Kerala Backwaters Getaway</div>
+                  <div class="card-meta">
+                    <svg class="icon" style="width: 12px; height: 12px">
+                      <use href="#i-clock" />
+                    </svg>
+                    5 days &nbsp;·&nbsp; Kerala
+                  </div>
+                  <div class="price-row">
+                    <span class="price">₹24,999 <small>per couple</small></span>
+                    <span class="btn">Enquire</span>
+                  </div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-img goa">
+                  <svg class="ph"><use href="#i-photo" /></svg>
+                  <span class="share-fab"
+                    ><svg class="icon"><use href="#i-share" /></svg
+                  ></span>
+                </div>
+                <div class="card-body">
+                  <div class="card-title">Goa Beach Escape</div>
+                  <div class="card-meta">
+                    <svg class="icon" style="width: 12px; height: 12px">
+                      <use href="#i-clock" />
+                    </svg>
+                    4 days &nbsp;·&nbsp; Goa
+                  </div>
+                  <div class="price-row">
+                    <span class="price">₹18,500 <small>per couple</small></span>
+                    <span class="btn">Enquire</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="footer">
+            <h3>Plan less, travel more.</h3>
+            <p>About Payanam · A real, reachable travel agency.</p>
+            <span class="contact"
+              ><svg class="icon" style="width: 13px; height: 13px">
+                <use href="#i-phone" />
+              </svg>
+              Contact us</span
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ SCREEN 2: PACKAGE DETAIL ============ -->
+      <div class="frame-wrap">
+        <div class="frame-label">2 · Package detail</div>
+        <div class="phone">
+          <div class="topbar">
+            <span class="back"
+              ><svg class="icon" style="width: 14px; height: 14px">
+                <use href="#i-back" />
+              </svg>
+              Back</span
+            >
+            <span class="share-out"
+              ><svg class="icon"><use href="#i-share" /></svg
+            ></span>
+          </div>
+          <div class="hero-photo">
+            <svg class="ph"><use href="#i-photo" /></svg>
+          </div>
+          <div class="detail-pad">
+            <div class="d-title">Kerala Backwaters Getaway</div>
+            <div class="d-meta">
+              <svg class="icon" style="width: 12px; height: 12px">
+                <use href="#i-clock" />
+              </svg>
+              5 days &nbsp;·&nbsp; Kerala
+            </div>
+            <div class="price-block">
+              <div class="top">
+                <span class="big">₹24,999</span>
+                <span class="badge-inc">all-inclusive</span>
+              </div>
+              <div class="per">per couple</div>
+            </div>
+            <p class="desc">
+              Five unhurried days through Kerala's palm-lined backwaters — a
+              night on a private houseboat, hill views in Munnar, and every
+              detail arranged for you.
+            </p>
+            <div class="inc-title">What's included</div>
+            <div class="inc-list">
+              <div class="inc-row">
+                <svg class="icon"><use href="#i-car" /></svg>
+                <div>
+                  <div class="lab">Transport</div>
+                  <div class="sub">AC car &amp; private houseboat</div>
+                </div>
+              </div>
+              <div class="inc-row">
+                <svg class="icon"><use href="#i-bed" /></svg>
+                <div>
+                  <div class="lab">Stay</div>
+                  <div class="sub">3 nights hotel, 1 night houseboat</div>
+                </div>
+              </div>
+              <div class="inc-row">
+                <svg class="icon"><use href="#i-food" /></svg>
+                <div>
+                  <div class="lab">Food</div>
+                  <div class="sub">Daily breakfast &amp; 2 dinners</div>
+                </div>
+              </div>
+              <div class="inc-row">
+                <svg class="icon"><use href="#i-map" /></svg>
+                <div>
+                  <div class="lab">Sightseeing</div>
+                  <div class="sub">Alleppey backwaters, Munnar tea estates</div>
+                </div>
+              </div>
+              <div class="inc-row">
+                <svg class="icon"><use href="#i-plus" /></svg>
+                <div>
+                  <div class="lab">Also included</div>
+                  <div class="sub">Airport pickup &amp; local guide</div>
+                </div>
+              </div>
+            </div>
+            <div class="gallery">
+              <div class="thumb a">
+                <svg class="icon"><use href="#i-photo" /></svg>
+              </div>
+              <div class="thumb b">
+                <svg class="icon"><use href="#i-photo" /></svg>
+              </div>
+              <div class="thumb c">
+                <svg class="icon"><use href="#i-photo" /></svg>
+              </div>
+              <svg class="icon chev" style="width: 18px; height: 18px">
+                <use href="#i-chev" />
+              </svg>
+            </div>
+          </div>
+          <div class="sticky-cta">
+            <span class="sticky-tag">↓ stays fixed as you scroll</span>
+            <span class="btn btn-block">Enquire about this trip</span>
+            <p class="sticky-note">
+              <svg class="icon" style="width: 12px; height: 12px">
+                <use href="#i-phone" />
+              </svg>
+              Prefer to talk? Call us
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ SCREEN 3: ENQUIRY FORM ============ -->
+      <div class="frame-wrap">
+        <div class="frame-label">3 · Enquiry form</div>
+        <div class="phone">
+          <div class="topbar">
+            <span class="back"
+              ><svg class="icon" style="width: 14px; height: 14px">
+                <use href="#i-back" />
+              </svg>
+              Back</span
+            >
+          </div>
+          <div class="form-pad">
+            <div class="form-h">Enquire about this trip</div>
+            <div class="form-sub">
+              Tell us a little, and we'll call you back.
+            </div>
+
+            <label class="label">Name</label>
+            <div class="field"><span class="placeholder">Your name</span></div>
+
+            <label class="label">Phone</label>
+            <div class="field">
+              <span class="placeholder">+91 ·········</span>
+            </div>
+
+            <label class="label">Package</label>
+            <div class="field prefilled">
+              <span class="val">Kerala Backwaters Getaway</span
+              ><svg class="icon"><use href="#i-pencil" /></svg>
+            </div>
+            <div class="hint">
+              Auto-filled — clear it to pick another from the list
+            </div>
+
+            <div class="row2">
+              <div class="col">
+                <label class="label">Travel dates</label>
+                <div class="field">
+                  <span class="placeholder">e.g. mid-July</span>
+                </div>
+              </div>
+              <div class="col small">
+                <label class="label">People</label>
+                <div class="field"><span class="placeholder">2</span></div>
+              </div>
+            </div>
+
+            <label class="label"
+              >Message <span class="opt">(optional)</span></label
+            >
+            <div class="textarea">
+              <span class="placeholder"
+                >Anything we should know? e.g. food preferences, budget, rooms,
+                special requirements</span
+              >
+            </div>
+
+            <span class="btn btn-block">Send enquiry</span>
+            <p class="sticky-note">
+              <svg class="icon" style="width: 12px; height: 12px">
+                <use href="#i-phone" />
+              </svg>
+              Prefer to talk now? Call us
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ SCREEN 4: OWNER DASHBOARD ============ -->
+      <div class="frame-wrap">
+        <div class="frame-label">4 · Owner dashboard (read-only)</div>
+        <div class="phone">
+          <div class="dash-head">
+            <span class="t">Enquiries</span>
+            <span class="logout"
+              ><svg class="icon" style="width: 13px; height: 13px">
+                <use href="#i-logout" />
+              </svg>
+              Log out</span
+            >
+          </div>
+          <div class="dash-body">
+            <div class="enq">
+              <div class="enq-top">
+                <div>
+                  <div class="enq-phone">+91 98765 43210</div>
+                  <div class="enq-name">Ravi Kumar</div>
+                </div>
+                <span class="stat sent"
+                  ><svg class="icon"><use href="#i-check" /></svg> sent</span
+                >
+              </div>
+              <div class="enq-line">
+                <svg class="icon"><use href="#i-pin" /></svg> Kerala Backwaters
+                Getaway
+              </div>
+              <div class="enq-line">
+                mid-July, flexible &nbsp;·&nbsp; 2 people
+              </div>
+              <div class="enq-msg">"Vegetarian food please, need 2 rooms"</div>
+              <div class="enq-time">11 Jun, 2:30 pm</div>
+            </div>
+
+            <div class="enq">
+              <div class="enq-top">
+                <div>
+                  <div class="enq-phone">+91 90123 45678</div>
+                  <div class="enq-name">Priya S</div>
+                </div>
+                <span class="stat pending"
+                  ><svg class="icon"><use href="#i-clock" /></svg> pending</span
+                >
+              </div>
+              <div class="enq-line">
+                <svg class="icon"><use href="#i-pin" /></svg> Goa Beach Escape
+              </div>
+              <div class="enq-line">this weekend &nbsp;·&nbsp; 4 people</div>
+              <div class="enq-time">11 Jun, 1:05 pm</div>
+            </div>
+
+            <div class="enq failed">
+              <div class="enq-top">
+                <div>
+                  <div class="enq-phone">+91 99887 76655</div>
+                  <div class="enq-name">Arun M</div>
+                </div>
+                <span class="stat failed"
+                  ><svg class="icon"><use href="#i-alert" /></svg> failed</span
+                >
+              </div>
+              <div class="enq-line">
+                <svg class="icon"><use href="#i-pin" /></svg> Ooty Family Trip
+              </div>
+              <div class="enq-line">flexible &nbsp;·&nbsp; 5 people</div>
+              <div class="enq-flag">
+                <svg class="icon"><use href="#i-alert" /></svg> Email didn't
+                send — follow up manually
+              </div>
+              <div class="enq-time">11 Jun, 11:40 am</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="legend">
+      <h4>What's reflected in these wireframes</h4>
+      <ul>
+        <li>
+          <b>Detail page:</b> the “Enquire” button stays fixed at the bottom as
+          you scroll; tapping a gallery photo opens it enlarged (modal).
+        </li>
+        <li>
+          <b>Form:</b> the package is auto-filled but editable; clearing it
+          shows a dropdown list of all packages, so nobody has to type a name
+          from memory.
+        </li>
+        <li>
+          <b>Dashboard:</b> phone number leads each card (the owner’s job is to
+          call back), name sits just under it; every card shows the customer’s
+          message; sent / pending / failed are colour-coded, and a failed
+          enquiry is flagged for manual follow-up. Log out asks for confirmation
+          first.
+        </li>
+        <li>
+          <b>Throughout:</b> secondary text darkened so it’s readable without
+          zooming; emerald used as an accent on white, not a flood.
+        </li>
+      </ul>
+      <p class="note">
+        Still placeholder, pending the owner: exact brand green, real
+        categories, real package content &amp; photos, and the full logo (a
+        simple plane mark stands in for now). About / Contact and Owner login
+        screens are simple and kept as written specs.
+      </p>
+    </div>
+  </body>
+</html>
