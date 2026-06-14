@@ -293,3 +293,181 @@ Responses:
 - Order of checks (rate-limit → validate → store → deliver) fails fast and cheap,
   doing expensive work only when input is clean.
 - The owner enquiry dashboard is read-only: GET only, no package mutations in v1.
+
+---
+
+## 3d. UX / UI Design — Wireframes
+
+Wireframes are designed mobile-first (most visitors are on phones). Each screen is
+documented as a written spec. Visual mockups were reviewed separately; this section
+is the source of truth for layout, hierarchy, and tokens.
+
+### Design Tokens (locked)
+
+- **Theme:** emerald green as accent on a clean white/near-white base ("accent, not flood").
+- **Greens:**
+  - Primary action / buttons: `#1D9E75`
+  - Brand text / price / links: `#0F6E56`
+  - Deepest (headings, footer bg): `#04342C`
+  - Hero tint background: `#E1F5EE`
+  - Main section background: `#F2FAF7` (soft green-tinted off-white)
+  - Card borders: `#DCEEE6`
+- **Exact brand green pending owner confirmation** — swap hex values, layout unchanged.
+- **Hierarchy principle:** price (green, ~19px) and package title (deep green, ~16px,
+  weight 500) lead the eye; duration and "per couple" stay quiet grey (secondary);
+  borders are soft green (quiet separators).
+- **Typography:** two weights only (400 regular, 500 for emphasis). Sentence case.
+
+### Screen 1 — Homepage (LOCKED)
+
+Top-to-bottom structure:
+
+1. **Header (light, white bg):** logo mark (simple plane in green circle — full Payanam
+   logo deferred) + "Payanam Holidays" (deep green) on the left; filled green "Call us"
+   pill on the right (visible site-wide, FR-9.1).
+2. **Hero (soft mint band):** headline "Go pack your things. We'll handle the rest." +
+   subline "Real trips, honest prices, zero hassle." (warm copy + transparency promise).
+3. **Category filter pills:** "All" (solid green, selected) + others (green outline,
+   tappable). Categories come from package config (grow automatically, OQ-10).
+4. **Section label:** "Popular near you" (signals geo-aware ordering, FR-2.3, IP-based).
+5. **Package cards (white, on soft-green section):** each card has —
+   - Photo area (real photos later, OQ-12) with a Share button (top-right circle)
+   - Title (deep green, bold) → duration · region (quiet grey)
+   - Price (green, prominent) + "per couple" note (grey) → "Enquire" button (filled green)
+   - Card's Enquire button routes to the detail page with the form ready (Option C).
+6. **Footer (deep emerald):** "Plan less, travel more." heading + about line + a second
+   "Contact us" button (credibility close, FR-9.2).
+
+Deliberately NOT on the homepage (scope): no search bar, no customer login, no
+testimonials carousel, no chat widget, no booking/payment.
+
+### Key UX decisions (homepage)
+
+- **Accent not flood:** white base, green only on actions/identity/key moments.
+- **Trust before action:** transparency message (hero) + contact options surround the
+  packages; trust is the #1 conversion driver (NFR-4).
+- **Price is the hero of each card:** travel customers scan for price first.
+- **Visible options over hidden:** filter pills and phone number are visible, not buried.
+- **Cohesive palette:** even backgrounds/borders belong to the green family (no stray grey).
+
+### Pending (does not block layout)
+
+- Exact brand green shade (owner)
+- Real category list (owner, OQ-10)
+- Real package photos and content (owner, OQ-12)
+- Full Payanam logo treatment (deferred — use simple mark for now)
+
+### Screen 2 — Package Detail Page (the conversion screen)
+
+Top-to-bottom:
+
+1. **Back link** (← to list) + Share button (top-right).
+2. **Hero photo** (large, the package's heroPhoto).
+3. **Title** (deep green, bold) + duration · region (quiet grey).
+4. **Price block:** large green price + "per couple" note. Prominent — the trust anchor.
+5. **Description:** the full `description` text (1–2 short paragraphs).
+6. **Inclusions (the heart):** each item from the `inclusions` object shown as its own
+   row with an icon — Transport, Accommodation, Food, Sightseeing, Other. Clean list,
+   not a text blob. This is where hidden-cost anxiety dies (FR-3.4).
+7. **Photo gallery:** the remaining `photos` (thumbnails).
+8. **Primary CTA:** large "Enquire about this trip" button (filled green), sticky/easy
+   to reach. Tapping opens the enquiry form with this package pre-filled.
+9. **Phone fallback:** "Prefer to talk? Call us" link below the CTA.
+
+Key decisions: price + inclusions are the two trust-builders, placed high and clear.
+The CTA is impossible to miss. Everything serves "understand fully → trust → enquire."
+
+### Screen 3 — Enquiry Form
+
+A focused form (own page or section), opened from a package:
+
+1. **Heading:** "Enquire about [Package Name]".
+2. **Fields (in order):**
+   - Name (text, required)
+   - Phone (text, required, validated)
+   - Package (text, pre-filled with current package, editable)
+   - Travel dates (text, free-form, e.g. "mid-July, flexible")
+   - Number of people (number)
+   - Message (textarea, optional) — placeholder prompts preferences: "Anything we should
+     know? e.g. food preferences, budget, rooms, special requirements"
+3. **Submit button:** filled green "Send enquiry".
+4. **On success:** confirmation — "Thanks! We'll call you shortly. Prefer to talk now?
+   Call [number]." (form data preserved on failure, per FR-5.6).
+
+Key decisions: shortest viable form (low friction), package auto-filled (don't make them
+remember), message placeholder does the preference-prompting.
+
+### Screen 4 — About / Contact
+
+Simple, credibility-focused:
+
+1. **About text:** who Payanam is, short and warm (builds trust for first-timers).
+2. **Contact block:** phone number (prominent, tappable), business email, maybe location.
+3. **Full Payanam logo** featured here (where the busy logo has room to breathe).
+   Key decision: this is a trust page — make the business feel real and reachable (FR-9.2).
+
+### Screen 5 — Owner Login (v1, trimmed)
+
+Minimal, single-owner login:
+
+1. Header: logo mark + "Payanam Holidays".
+2. Heading: "Owner login".
+3. Fields: email, password.
+4. Button: "Log in" (filled green).
+5. Error state: wrong credentials → "Incorrect email or password".
+6. Optional: rate-limit message after too many attempts (brute-force protection).
+
+Auth logic: the entered email/password is checked against the `owners` table;
+on success, issue a JWT and enter the dashboard. Not linked from public nav —
+owner navigates directly (e.g. /login).
+
+DELIBERATELY EXCLUDED from v1 (single owner — developer can reset credentials):
+
+- Self-service password reset / "forgot password" email flow
+- "Continue with Google" (OAuth)
+- Passkey login
+  These are recorded in the v2 roadmap below.
+
+### Screen 6 — About / Contact (implemented as the site footer)
+
+DECISION: About/Contact is NOT a separate page — it lives in the footer, visible
+on every screen. This puts credibility signals everywhere instead of behind a click.
+
+Footer contents:
+
+1. Full Payanam logo (this is where the detailed logo has room to breathe).
+2. Brand name + tagline ("Plan less, travel more" / "Real trips, honest prices,
+   zero hassle").
+3. Contact: phone number (prominent, tappable) + social links (Instagram, Facebook,
+   WhatsApp).
+4. Copyright line.
+
+Key decision: the footer is the trust/credibility surface (NFR-4) — make the
+business feel real and reachable, site-wide.
+
+Note: a "Powered by Kizo" credit line is under consideration — confirm with the
+owner before adding, since it's his business-facing site.
+
+### 3d Summary — all screens locked
+
+1. Homepage ✅
+2. Package detail page ✅
+3. Enquiry form ✅
+4. Owner dashboard (cards; phone-first, message shown per card; logout confirm) ✅
+5. Owner login (email + password only) ✅
+6. About / Contact (as site-wide footer) ✅
+
+### v2 / later — owner auth enhancements (deferred from v1)
+
+- Self-service password reset (email verification + reset link)
+- "Continue with Google" (OAuth) sign-in
+- Passkey login
+  Reason for deferral: v1 has a single known owner; the developer can reset
+  credentials directly. These earn their place only with multiple admin users or
+  real demand.
+
+### Other v2 items captured during design
+
+- Daily digest email of enquiries (the dashboard covers the safety-net need in v1)
+- Responsive table view for the dashboard on wide screens (owner is mobile in v1)
+- Full type-ahead autosuggest on the package field (v1 uses a simple dropdown)
