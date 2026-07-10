@@ -65,7 +65,7 @@ export const packages: Package[] = [
       other: "Airport pickup",
     },
     photos: ["/images/goa-1.jpg", "/images/goa-2.jpg"],
-    heroPhoto: "/photos/goa-hero.jpg",
+    heroPhoto: "/photos/goa.jpeg",
     backupImg: Palmtree,
   },
   {

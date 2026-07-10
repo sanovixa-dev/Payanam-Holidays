@@ -1,12 +1,13 @@
-import React from "react";
 import type { Enquiry } from "../pages/Dashboard";
 import { MapPin } from "lucide-react";
+
+function formatTimestamp(iso: string) {
+  const [date, time] = iso.split("T");
+  return `${date} • ${time.slice(0, time.indexOf("."))}`;
+}
+
 const EnquiryCard = (props: { enquiry: Enquiry }) => {
-  console.log("====================================");
-  console.log(props.enquiry.id);
-  console.log("====================================");
   const {
-    id,
     name,
     phone,
     package_id,
@@ -19,12 +20,12 @@ const EnquiryCard = (props: { enquiry: Enquiry }) => {
   } = props.enquiry;
 
   return (
-    <div className="max-w-2xl shadow-md p-4 flex-wrap border border-card-border rounded-xl">
-      <div className="flex justify-between items-start">
+    <div className="max-w-2xl shadow-md hover:shadow-lg transition-shadow duration-300 p-4 flex-wrap border border-card-border rounded-xl bg-white">
+      <div className="flex justify-between items-start gap-2">
         <div>
           <a
             href={`tel:${phone}`}
-            className="font-semibold text-2xl text-green-text"
+            className="font-semibold text-2xl text-green-text rounded-md transition-opacity duration-200 hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-btn"
           >
             {phone}
           </a>
@@ -33,18 +34,18 @@ const EnquiryCard = (props: { enquiry: Enquiry }) => {
         <p
           className={
             delivery_status === "sent"
-              ? "bg-green-btn/10 text-green-text py-2 px-3 rounded-lg"
+              ? "bg-green-btn/10 text-green-text py-2 px-3 rounded-lg text-sm font-medium shrink-0"
               : delivery_status === "failed"
-                ? "bg-red-100 text-red-600  py-2 px-3 rounded-lg"
-                : "bg-gray-100 text-gray-600  py-2 px-3 rounded-lg"
+                ? "bg-red-100 text-red-600 py-2 px-3 rounded-lg text-sm font-medium shrink-0"
+                : "bg-gray-100 text-gray-600 py-2 px-3 rounded-lg text-sm font-medium shrink-0"
           }
         >
           {delivery_status}
         </p>
       </div>
 
-      <p className="flex items-center text-muted gap-1">
-        <MapPin className="" size={14} />
+      <p className="flex items-center text-muted gap-1 mt-2">
+        <MapPin size={14} />
         <span>{package_id}</span>
       </p>
       <p className="text-muted">
@@ -54,9 +55,11 @@ const EnquiryCard = (props: { enquiry: Enquiry }) => {
         {message ? message : "Nil"}
       </p>
 
-      <p>
-        {created_at.split("T")[0]} •
-        {created_at.slice(created_at.indexOf("T") + 1, created_at.indexOf("."))}
+      <p className="text-faint text-sm">
+        Enquired {formatTimestamp(created_at)}
+        {delivery_status === "sent" && delivered_at && (
+          <> • Delivered {formatTimestamp(delivered_at)}</>
+        )}
       </p>
     </div>
   );

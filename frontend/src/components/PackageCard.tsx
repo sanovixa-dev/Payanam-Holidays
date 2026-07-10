@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Clock, Share2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import type { Package } from "../data/packages";
@@ -14,11 +15,11 @@ export const PackageCard = (props: pkgProp) => {
   const index = props.index;
   const { ref, inView } = useInView();
   const visual = getCardVisual(pkg.category);
+  const [imgLoaded, setImgLoaded] = useState(false);
+  const [imgFailed, setImgFailed] = useState(false);
+  const showPhoto = pkg.heroPhoto && !imgFailed;
 
   const handleShare = async () => {
-    console.log("====================================");
-    console.log(navigator.share);
-    console.log("====================================");
     if (!navigator.share) return;
     try {
       await navigator.share({
@@ -26,9 +27,6 @@ export const PackageCard = (props: pkgProp) => {
         text: pkg.summary,
         url: `${window.location.origin}/PackageDetail/${pkg.id}`,
       });
-      console.log("====================================");
-      console.log(navigator.geolocation);
-      console.log("====================================");
     } catch {
       // user cancelled the share sheet, nothing to do
     }
@@ -51,14 +49,22 @@ export const PackageCard = (props: pkgProp) => {
         <button
           onClick={handleShare}
           aria-label="Share this package"
-          className="text-green-text absolute top-0 right-0 z-10 rounded-full bg-white p-1.5 m-2 shadow-sm transition-transform duration-200 hover:scale-110 hover:cursor-pointer active:scale-95"
+          className="text-green-text absolute top-0 right-0 z-10 rounded-full bg-white p-1.5 m-2 shadow-sm transition-transform duration-200 hover:scale-110 hover:cursor-pointer active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
         >
           <Share2 size={18} />
         </button>
-        {pkg.heroPhoto ? (
-          <img src={pkg.heroPhoto} alt={pkg.title} />
+        {showPhoto ? (
+          <img
+            src={pkg.heroPhoto}
+            alt={pkg.title}
+            onLoad={() => setImgLoaded(true)}
+            onError={() => setImgFailed(true)}
+            className={`h-full w-full object-cover transition-all duration-500 ease-out group-hover:scale-105 ${
+              imgLoaded ? "opacity-100 blur-0" : "opacity-0 blur-sm"
+            }`}
+          />
         ) : BkpIcon ? (
-          <BkpIcon />
+          <BkpIcon className="text-white/90" size={40} />
         ) : null}
       </div>
       <div className="rounded-b-lg p-3">
@@ -81,7 +87,7 @@ export const PackageCard = (props: pkgProp) => {
           </h2>
           <Link
             to={`/PackageDetail/${pkg.id}`}
-            className="bg-green-btn p-2 px-4 rounded-lg text-white transition-colors duration-200 hover:bg-green-text active:scale-95"
+            className="bg-green-btn p-2 px-4 rounded-lg text-white transition-colors duration-200 hover:bg-green-text active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-btn focus-visible:ring-offset-2"
           >
             Enquire
           </Link>

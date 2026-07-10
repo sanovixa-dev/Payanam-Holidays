@@ -35,7 +35,7 @@ const Login = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-section-bg px-4">
-      <div className="w-full max-w-sm bg-white rounded-2xl shadow-md p-8">
+      <div className="animate-fade-in-up w-full max-w-sm bg-white rounded-2xl shadow-md p-8">
         {/* logo + heading */}
         <div className="flex flex-col items-center mb-6">
           <div className="rounded-full bg-green-btn p-3 mb-3">
@@ -78,7 +78,7 @@ const Login = () => {
 
           <button
             type="submit"
-            className="bg-green-btn text-white py-3 rounded-lg font-semibold w-full hover:bg-green-text active:scale-95 transition-colors mt-2"
+            className="bg-green-btn text-white py-3 rounded-xl font-semibold w-full hover:bg-green-text active:scale-95 transition-colors mt-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-btn focus-visible:ring-offset-2"
           >
             Log in
           </button>

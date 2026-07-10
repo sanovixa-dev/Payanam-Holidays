@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { packages } from "../data/packages";
 import Header from "../components/Header";
+import NotFound from "../components/NotFound";
 import { toast } from "react-hot-toast";
 const Form = () => {
   const { id } = useParams();
@@ -14,7 +15,13 @@ const Form = () => {
     message: "",
     package: id,
   });
-  if (!pkg) return <div>No Packages Found</div>;
+  if (!pkg)
+    return (
+      <NotFound
+        title="Package not found"
+        message="This trip may have been removed or the link is incorrect."
+      />
+    );
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -58,8 +65,6 @@ const Form = () => {
           body: JSON.stringify(formData),
         },
       );
-      const res = await send.json();
-
       if (send.ok) {
         toast.custom(() => (
           <div className="bg-green-deep text-white px-5 py-4 rounded-xl shadow-lg max-w-sm">
@@ -72,20 +77,19 @@ const Form = () => {
       } else {
         toast.error("Something went wrong. Please try again.");
       }
-    } catch (err) {
-      console.log("Err:", err);
+    } catch {
       toast.error("Couldn't reach the server. Check your connection.");
     }
   };
   return (
-    <div>
+    <div className="min-h-screen bg-section-bg">
       <Header />
 
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col max-w-lg mx-auto p-4 gap-4  shadow-md rounded-2xl"
+        className="animate-fade-in-up flex flex-col max-w-lg mx-auto my-8 p-6 gap-4 bg-white border border-card-border shadow-md rounded-2xl"
       >
-        <p className="bg-hero-tint p-3 m-2 rounded-md text-green-text">
+        <p className="bg-hero-tint p-3 rounded-md text-green-text">
           Enquiring about: {pkg?.title}
         </p>
         <div className="flex flex-col gap-1">
@@ -163,7 +167,7 @@ const Form = () => {
         </div>
         <button
           type="submit"
-          className="bg-green-btn text-white py-3 rounded-lg font-semibold w-full hover:bg-green-text active:scale-95 transition-colors"
+          className="bg-green-btn text-white py-3 rounded-xl font-semibold w-full hover:bg-green-text active:scale-95 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-btn focus-visible:ring-offset-2"
         >
           Request a callback
         </button>

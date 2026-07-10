@@ -14,7 +14,7 @@ const Footer = () => {
           <div className="flex flex-col gap-y-4 ml-2">
             <a
               href="https://www.instagram.com/payanam__holidays/"
-              className="flex gap-2 transition-opacity duration-200 hover:opacity-75"
+              className="flex gap-2 rounded-md transition-opacity duration-200 hover:opacity-75 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
               title="Instagram"
               aria-label="Instagram"
             >
@@ -34,7 +34,7 @@ const Footer = () => {
             {/* TODO: confirm real Facebook page URL with owner */}
             <a
               href="https://www.facebook.com/"
-              className="flex gap-2 transition-opacity duration-200 hover:opacity-75"
+              className="flex gap-2 rounded-md transition-opacity duration-200 hover:opacity-75 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
               title="Facebook"
               aria-label="Facebook"
             >
@@ -55,7 +55,7 @@ const Footer = () => {
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex gap-2 transition-opacity duration-200 hover:opacity-75"
+              className="flex gap-2 rounded-md transition-opacity duration-200 hover:opacity-75 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
               title="Whatsapp"
               aria-label="Whatsapp"
             >
@@ -78,7 +78,7 @@ const Footer = () => {
           <a
             href={TEL_HREF}
             aria-label="Contact us"
-            className="bg-white text-green-text flex px-4 py-2 items-center gap-2 rounded-lg shadow-sm transition-colors duration-200 hover:bg-hero-tint active:scale-95 hover:cursor-pointer"
+            className="bg-white text-green-text flex px-4 py-2 items-center gap-2 rounded-lg shadow-sm transition-colors duration-200 hover:bg-hero-tint active:scale-95 hover:cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-green-deep"
           >
             <Phone size={16} /> Contact Us
           </a>
