@@ -1,6 +1,8 @@
 import { Clock, Share2 } from "lucide-react";
+import { Link } from "react-router-dom";
 import type { Package } from "../data/packages";
 import { useInView } from "../hooks/useInView";
+import { getCardVisual } from "./packageCardVisuals";
 
 type pkgProp = {
   package: Package;
@@ -11,39 +13,78 @@ export const PackageCard = (props: pkgProp) => {
   const BkpIcon = pkg.backupImg;
   const index = props.index;
   const { ref, inView } = useInView();
+  const visual = getCardVisual(pkg.category);
+
+  const handleShare = async () => {
+    console.log("====================================");
+    console.log(navigator.share);
+    console.log("====================================");
+    if (!navigator.share) return;
+    try {
+      await navigator.share({
+        title: pkg.title,
+        text: pkg.summary,
+        url: `${window.location.origin}/PackageDetail/${pkg.id}`,
+      });
+      console.log("====================================");
+      console.log(navigator.geolocation);
+      console.log("====================================");
+    } catch {
+      // user cancelled the share sheet, nothing to do
+    }
+  };
+
   return (
     <div
       ref={ref}
       style={{ transitionDelay: `${index * 100}ms` }}
-      className={`rounded-lg bg-white shadow-lg transition-all duration-700 ease-out ${
+      className={`group rounded-lg bg-white shadow-md transition-all duration-700 ease-out hover:-translate-y-1 hover:shadow-xl hover:duration-300 ${
         inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"
       }`}
     >
-      <div className="h-44 bg-section-bg rounded-t-md relative flex items-center justify-center">
-        <button className="text-green-text absolute top-0 right-0 rounded-full bg-white p-1 m-2 hover:cursor-pointer">
+      <div
+        className={`h-44 rounded-t-lg relative flex items-center justify-center overflow-hidden ${visual.gradient}`}
+      >
+        <div
+          className={`absolute bottom-0 left-0 right-0 h-10 ${visual.overlay}`}
+        />
+        <button
+          onClick={handleShare}
+          aria-label="Share this package"
+          className="text-green-text absolute top-0 right-0 z-10 rounded-full bg-white p-1.5 m-2 shadow-sm transition-transform duration-200 hover:scale-110 hover:cursor-pointer active:scale-95"
+        >
           <Share2 size={18} />
         </button>
-        <BkpIcon size={48} className="text-green-text" />
+        {pkg.heroPhoto ? (
+          <img src={pkg.heroPhoto} alt={pkg.title} />
+        ) : BkpIcon ? (
+          <BkpIcon />
+        ) : null}
       </div>
-      <div className=" rounded-b-md p-2">
-        <h2 className="font-semibold text-green-text text-lg">{pkg.title}</h2>
-        <div className="flex items-center gap-1 text-muted">
+      <div className="rounded-b-lg p-3">
+        <h2 className="font-semibold text-green-text text-lg leading-snug line-clamp-1">
+          {pkg.title}
+        </h2>
+        <div className="flex items-center gap-1 text-muted mt-1">
           <Clock size={12} />
           <p>
             {pkg.durationDays} days • {pkg.region}
           </p>
         </div>
 
-        <div className="flex justify-between  items-center">
+        <div className="flex justify-between items-center mt-3">
           <h2 className="font-semibold text-green-text text-lg">
-            ₹{pkg.price}{" "}
+            ₹{pkg.price.toLocaleString("en-IN")}{" "}
             <span className="font-normal text-muted text-base">
               {pkg.priceNote}
             </span>
           </h2>
-          <button className="bg-green-btn p-2 px-4 rounded-lg text-white">
+          <Link
+            to={`/PackageDetail/${pkg.id}`}
+            className="bg-green-btn p-2 px-4 rounded-lg text-white transition-colors duration-200 hover:bg-green-text active:scale-95"
+          >
             Enquire
-          </button>
+          </Link>
         </div>
       </div>
     </div>

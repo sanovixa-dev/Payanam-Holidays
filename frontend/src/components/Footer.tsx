@@ -1,19 +1,20 @@
 import { Phone } from "lucide-react";
+import { TEL_HREF, WHATSAPP_URL } from "../data/contact";
 
 const Footer = () => {
   return (
-    <div className="bg-green-deep  text-white px-2 py-8 ">
-      <div className="flex flex-col items-center justify-center">
+    <div className="bg-green-deep text-white px-6 py-10">
+      <div className="flex flex-col items-center justify-center text-center mb-8">
         <h2 className="text-xl font-semibold">Plan less, travel more.</h2>
-        <h3 className="text-hero-tint">A real, reachable travel agency.</h3>
+        <p className="text-hero-tint mt-1">A real, reachable travel agency.</p>
       </div>
-      <div className="flex flex-col md:flex-row">
-        <div className="flex flex-col gap-2">
-          <p className="">Follow Us</p>
+      <div className="flex flex-col md:flex-row md:justify-between gap-8 max-w-md md:max-w-2xl mx-auto">
+        <div className="flex flex-col gap-3">
+          <p className="font-medium">Follow Us</p>
           <div className="flex flex-col gap-y-4 ml-2">
             <a
               href="https://www.instagram.com/payanam__holidays/"
-              className="flex gap-2"
+              className="flex gap-2 transition-opacity duration-200 hover:opacity-75"
               title="Instagram"
               aria-label="Instagram"
             >
@@ -30,9 +31,10 @@ const Footer = () => {
               </span>
               Instagram
             </a>
+            {/* TODO: confirm real Facebook page URL with owner */}
             <a
-              href="#"
-              className="flex gap-2"
+              href="https://www.facebook.com/"
+              className="flex gap-2 transition-opacity duration-200 hover:opacity-75"
               title="Facebook"
               aria-label="Facebook"
             >
@@ -50,8 +52,10 @@ const Footer = () => {
               Facebook
             </a>
             <a
-              href="#"
-              className="flex gap-2"
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex gap-2 transition-opacity duration-200 hover:opacity-75"
               title="Whatsapp"
               aria-label="Whatsapp"
             >
@@ -70,12 +74,16 @@ const Footer = () => {
             </a>
           </div>
         </div>
-        <div className="flex flex-col gap-4">
-          <button className="bg-white text-green-text flex px-4 py-2 items-center gap-2 rounded-lg hover:cursor-pointer">
+        <div className="flex flex-col gap-4 items-start md:items-end">
+          <a
+            href={TEL_HREF}
+            aria-label="Contact us"
+            className="bg-white text-green-text flex px-4 py-2 items-center gap-2 rounded-lg shadow-sm transition-colors duration-200 hover:bg-hero-tint active:scale-95 hover:cursor-pointer"
+          >
             <Phone size={16} /> Contact Us
-          </button>
-          <p className="font-light text-hero-tint">
-            © Copyright Payanam Holidays™
+          </a>
+          <p className="font-light text-hero-tint text-sm">
+            © {new Date().getFullYear()} Copyright Payanam Holidays™
           </p>
         </div>
       </div>

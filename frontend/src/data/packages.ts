@@ -10,15 +10,16 @@ export type Package = {
   summary: string;
   description: string;
   inclusions: {
+    "No of rooms"?: number;
     transport: string;
     accommodation: string;
     food: string;
-    sightseeing: string;
+    sightseeing?: string;
     other?: string;
   };
   photos: string[];
   heroPhoto: string;
-  backupImg: LucideIcon;
+  backupImg?: LucideIcon;
 };
 export const packages: Package[] = [
   {
@@ -41,7 +42,7 @@ export const packages: Package[] = [
       other: "Airport pickup, guide",
     },
     photos: ["/images/kerala-1.jpg", "/images/kerala-2.jpg"],
-    heroPhoto: "/images/kerala-hero.jpg",
+    heroPhoto: "/photos/alappuzha_boat_house.png",
     backupImg: Sailboat,
   },
   {
@@ -64,7 +65,97 @@ export const packages: Package[] = [
       other: "Airport pickup",
     },
     photos: ["/images/goa-1.jpg", "/images/goa-2.jpg"],
-    heroPhoto: "/images/goa-hero.jpg",
+    heroPhoto: "/photos/goa-hero.jpg",
     backupImg: Palmtree,
+  },
+  {
+    id: "Alapuzha_back_waters_hotel_1",
+    title: "Alapuza Backwaters Getaway",
+    category: "Family",
+    region: "Kerala",
+    durationDays: 5,
+    price: 12000,
+    priceNote: "4 Members",
+    summary: "TO BE DISCUSSED",
+    description:
+      "Experience tranquility,luxury and nature together with an unfogettable Alappuzha Houseboat journey.",
+    inclusions: {
+      "No of rooms": 1,
+      transport: "to be discussed",
+      accommodation: "AC room with luxury feel stay",
+      food: "Lunch,dinner and breakfast",
+      other: "24/7 assistance, 2 bikes rental",
+    },
+    photos: ["photos/alappuzha_boat_house"],
+    heroPhoto: "/photos/alappuzha_boat_house.png",
+    backupImg: Sailboat,
+  },
+  {
+    id: "Munroe_island_1",
+    title: "Munroe_island",
+    category: "Friends",
+    region: "Kerala",
+    durationDays: 3,
+    // durationDays: "12 PM TO 11 AM",
+    price: 10000,
+    priceNote: "6 Members",
+    summary: "TO BE DISCUSSED",
+    description:
+      "Experience the new stay in backwater and nature together with a country boad and unforgettable fish meals",
+    inclusions: {
+      "No of rooms": 2,
+      transport: "to be discussed",
+      accommodation: "AC room with backwater view",
+      food: "Lunch,dinner and breakfast",
+      other: "24/7 assistance, sightseeing and activities",
+    },
+    photos: ["photos/munroe_island_stay"],
+    heroPhoto: "/photos/munroe_island_stay.jpeg",
+    backupImg: Sailboat,
+  },
+  {
+    id: "Varkala_1",
+    title: "Varkala",
+    category: "Friends",
+    region: "Kerala",
+    durationDays: 3,
+    // durationDays: "12 PM TO 11 AM",
+    price: 12000,
+    priceNote: "4 Members",
+    summary: "TO BE DISCUSSED",
+    description:
+      "Experience tranquility,luxury and nature together with an unfogettable sea view stay",
+    inclusions: {
+      "No of rooms": 1,
+      transport: "to be discussed",
+      accommodation: "AC room with luxury feel",
+      food: "Lunch,dinner and breakfast",
+      other: "24/7 assistance,2 bike rental",
+    },
+    photos: ["photos/varkala"],
+    heroPhoto: "/photos/varkala.jpeg",
+    backupImg: Sailboat,
+  },
+  {
+    id: "Manali_1",
+    title: "Manali",
+    category: "Family",
+    region: "Manali",
+    durationDays: 2,
+    // durationDays: "2 Nights and 2 Days",
+    price: 27000,
+    priceNote: "2 Members",
+    summary: "TO BE DISCUSSED",
+    description: "Experience the snow with an unforgettable stay",
+    inclusions: {
+      "No of rooms": 1,
+      transport: "to be discussed",
+      accommodation: "AC room with luxury feel",
+      food: "4 times food ",
+      other: "24/7 assistance,site seeing",
+    },
+    photos: ["photos/manali"],
+    heroPhoto: "/photos/manali.jpg",
+    backupImg: Sailboat,
   },
 ];
