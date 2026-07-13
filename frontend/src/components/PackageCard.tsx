@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import type { Package } from "../data/packages";
 import { useInView } from "../hooks/useInView";
 import { getCardVisual } from "./packageCardVisuals";
+import toast from "react-hot-toast";
 
 type pkgProp = {
   package: Package;
@@ -20,15 +21,21 @@ export const PackageCard = (props: pkgProp) => {
   const showPhoto = pkg.heroPhoto && !imgFailed;
 
   const handleShare = async () => {
-    if (!navigator.share) return;
+    const shareData = {
+      title: pkg.title,
+      text: pkg.summary,
+      url: `${window.location.origin}/PackageDetail/${pkg.id}`,
+    };
+
     try {
-      await navigator.share({
-        title: pkg.title,
-        text: pkg.summary,
-        url: `${window.location.origin}/PackageDetail/${pkg.id}`,
-      });
-    } catch {
-      // user cancelled the share sheet, nothing to do
+      if (navigator.share) {
+        await navigator.share(shareData);
+      } else if (navigator.clipboard) {
+        await navigator.clipboard.writeText(shareData.url);
+        toast.success("Link copied!");
+      }
+    } catch (err) {
+      console.error("ERROR:", err);
     }
   };
 
