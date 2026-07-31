@@ -4,7 +4,8 @@ export type Package = {
   title: string;
   category: string;
   region: string;
-  durationDays: number;
+  durationDays: string;
+  "No of rooms"?: number;
   price: number;
   priceNote: string;
   summary: string;
@@ -27,7 +28,7 @@ export const packages: Package[] = [
     title: "Kerala Backwaters Getaway",
     category: "Family",
     region: "Kerala",
-    durationDays: 5,
+    durationDays: "5",
     price: 24999,
     priceNote: "per couple",
     summary:
@@ -50,7 +51,7 @@ export const packages: Package[] = [
     title: "Goa Bachelors Party",
     category: "Group",
     region: "Goa",
-    durationDays: 5,
+    durationDays: "5",
     price: 8500,
     priceNote: "per person",
     summary:
@@ -73,7 +74,7 @@ export const packages: Package[] = [
     title: "Alapuza Backwaters Getaway",
     category: "Family",
     region: "Kerala",
-    durationDays: 5,
+    durationDays: "5",
     price: 12000,
     priceNote: "4 Members",
     summary: "TO BE DISCUSSED",
@@ -95,7 +96,7 @@ export const packages: Package[] = [
     title: "Munroe_island",
     category: "Friends",
     region: "Kerala",
-    durationDays: 3,
+    durationDays: "3",
     // durationDays: "12 PM TO 11 AM",
     price: 10000,
     priceNote: "6 Members",
@@ -118,7 +119,7 @@ export const packages: Package[] = [
     title: "Varkala",
     category: "Friends",
     region: "Kerala",
-    durationDays: 3,
+    durationDays: "3",
     // durationDays: "12 PM TO 11 AM",
     price: 12000,
     priceNote: "4 Members",
@@ -141,8 +142,7 @@ export const packages: Package[] = [
     title: "Manali",
     category: "Family",
     region: "Manali",
-    durationDays: 2,
-    // durationDays: "2 Nights and 2 Days",
+    durationDays: "2 Nights and 2",
     price: 27000,
     priceNote: "2 Members",
     summary: "TO BE DISCUSSED",
@@ -157,5 +157,68 @@ export const packages: Package[] = [
     photos: ["photos/manali"],
     heroPhoto: "/photos/manali.jpg",
     backupImg: Sailboat,
+  },
+  {
+    id: "Langkawi_1",
+    title: "Langkawi",
+    category: "Couple",
+    region: "Malaysia",
+    "No of rooms": 1,
+    durationDays: "3N / 4",
+    price: 75000,
+    priceNote: "2 Members",
+    summary: "TO BE DISCUSSED",
+    description:
+      "Experience luxury, and nature together with an unforgettable journey",
+    inclusions: {
+      transport: "Customizable",
+      accommodation: "AC Rooms with luxury feel",
+      food: "BreakFast and dinner",
+      other: "24/7 assistance",
+    },
+    photos: ["photos/alappuzha_boat_house"],
+    heroPhoto: "photos/alappuzha_boat_house",
+  },
+  {
+    id: "Andamaan",
+    title: "Andamaan",
+    category: "Couple",
+    region: "Island",
+    "No of rooms": 1,
+    durationDays: "2N / 3",
+    price: 40000,
+    priceNote: "2 Members",
+    summary: "TO BE DISCUSSED",
+    description:
+      "Experience luxury, and island together with an unforgettable journey ",
+    inclusions: {
+      transport: "Customizable",
+      accommodation: "AC Rooms with luxury feel",
+      food: "BreakFast",
+      other: "24/7 assistance",
+    },
+    photos: [""],
+    heroPhoto: "",
+  },
+  {
+    id: "GOA",
+    title: "GOA",
+    category: "Friends",
+    region: "Island",
+    "No of rooms": 1,
+    durationDays: "2N / 3",
+    price: 24000,
+    priceNote: "4 Members",
+    summary: "TO BE DISCUSSED",
+    description:
+      "Experience luxury, and island together with an unforgettable goa journey ",
+    inclusions: {
+      transport: "Customizable",
+      accommodation: "AC Rooms with luxury feel",
+      food: "BreakFast",
+      other: "24/7 assistance",
+    },
+    photos: ["photos/Langkawi island hopping.jpg"],
+    heroPhoto: "photos/Langkawi.jpg",
   },
 ];
