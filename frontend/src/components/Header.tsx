@@ -1,6 +1,7 @@
-import { Phone, PlaneIcon } from "lucide-react";
+import { Phone } from "lucide-react";
 import { Link } from "react-router-dom";
 import { TEL_HREF } from "../data/contact";
+import logo from "/photos/payanam-logo-clean-transparent.png";
 const Header = () => {
   return (
     <div className="sticky top-0 z-20 w-full border-b border-card-border bg-white/90 backdrop-blur-sm shadow-sm">
@@ -9,11 +10,15 @@ const Header = () => {
           to="/"
           className="flex gap-4 items-center rounded-md transition-opacity duration-200 hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-btn"
         >
-          <div className="rounded-full bg-green-btn p-2">
-            <PlaneIcon size={18} className="text-white" />
+          <div className="w-18 h-18 rounded-full bg-green-btn overflow-hidden">
+            <img
+              src={logo}
+              alt="Brand Logo"
+              className="w-full h-full object-cover rounded-full"
+            />
           </div>
 
-          <p className="text-green-text text-lg font-semibold">
+          <p className="text-green-text text-xl font-semibold">
             Payanam Holidays
           </p>
         </Link>
