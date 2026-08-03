@@ -176,8 +176,8 @@ export const packages: Package[] = [
       food: "BreakFast and dinner",
       other: "24/7 assistance",
     },
-    photos: ["photos/alappuzha_boat_house"],
-    heroPhoto: "photos/alappuzha_boat_house",
+    photos: ["/photos/langkawi.jpg"],
+    heroPhoto: "/photos/langkawi.jpg",
   },
   {
     id: "Andamaan",
@@ -197,8 +197,8 @@ export const packages: Package[] = [
       food: "BreakFast",
       other: "24/7 assistance",
     },
-    photos: [""],
-    heroPhoto: "",
+    photos: ["/photos/andaman.jpg"],
+    heroPhoto: "/photos/andaman.jpg",
   },
   {
     id: "GOA",
@@ -218,7 +218,7 @@ export const packages: Package[] = [
       food: "BreakFast",
       other: "24/7 assistance",
     },
-    photos: ["photos/Langkawi island hopping.jpg"],
-    heroPhoto: "photos/Langkawi.jpg",
+    photos: ["/photos/goa.jpg"],
+    heroPhoto: "/photos/goa.jpg",
   },
 ];

@@ -18,6 +18,9 @@ export const PackageCard = (props: pkgProp) => {
   const visual = getCardVisual(pkg.category);
   const [imgLoaded, setImgLoaded] = useState(false);
   const [imgFailed, setImgFailed] = useState(false);
+  console.log("====================================");
+  console.log(imgFailed, pkg.heroPhoto);
+  console.log("====================================");
   const showPhoto = pkg.heroPhoto && !imgFailed;
 
   const handleShare = async () => {
@@ -65,7 +68,9 @@ export const PackageCard = (props: pkgProp) => {
             src={pkg.heroPhoto}
             alt={pkg.title}
             onLoad={() => setImgLoaded(true)}
-            onError={() => setImgFailed(true)}
+            onError={() => {
+              setImgFailed(true);
+            }}
             className={`h-full w-full object-cover transition-all duration-500 ease-out group-hover:scale-105 ${
               imgLoaded ? "opacity-100 blur-0" : "opacity-0 blur-sm"
             }`}
