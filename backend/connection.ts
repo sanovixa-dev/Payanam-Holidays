@@ -5,7 +5,7 @@ const fallbackString =
   "postgresql://postgres:Postgres123@base.railway.internal:5432/railway";
 
 const connectionString =
-  process.env.DATABASE_PUBLIC_URL || process.env.DATABASE_URL || fallbackString;
+  "postgresql://postgres:Postgres123@base.railway.internal:5432/railway";
 
 // Add this quick console debug line to prove what your server sees at launch
 console.log(
