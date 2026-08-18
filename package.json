@@ -3,5 +3,8 @@
     "@tailwindcss/vite": "^4.3.1",
     "lucide-react": "^1.20.0",
     "tailwindcss": "^4.3.1"
+  },
+  "devDependencies": {
+    "@types/pg": "^8.23.1"
   }
 }
