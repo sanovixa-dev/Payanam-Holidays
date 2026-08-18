@@ -14,7 +14,7 @@
     "rootDir": "./",
     "noEmit": false,
     "target": "esnext",
-    "types": [],
+    // "types": [],
     // For nodejs:
     // "lib": ["esnext"],
     // "types": ["node"],
