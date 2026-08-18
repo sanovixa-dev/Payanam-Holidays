@@ -4,7 +4,7 @@ import router from "./routes/health.js";
 import enquiry from "./routes/enquiries.js";
 import login from "./routes/login.js";
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 app.use(cors());
 
 app.use(express.json());
