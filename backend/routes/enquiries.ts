@@ -1,6 +1,6 @@
 import express from "express";
 import type { Request, Response } from "express";
-import pool from "../connection.js";
+import { pool } from "../connection.js";
 import { Resend } from "resend";
 import verifyJWT from "../middlewares/verifyJWT.js";
 const enquiry = express.Router();
