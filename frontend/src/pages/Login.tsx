@@ -29,6 +29,10 @@ const Login = () => {
         localStorage.setItem("token", data.token);
         navigate("/DashBoard");
       } else {
+        console.log("====================================");
+        console.log("RES from Backend", res);
+        console.log("DATA", data);
+        console.log("====================================");
         toast.error("Invalid credentials");
       }
     } catch (err) {
