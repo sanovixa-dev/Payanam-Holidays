@@ -2,7 +2,7 @@ import "dotenv/config"; // Must stay at the absolute top of the page!
 import pg from "pg";
 
 const fallbackString =
-  "postgresql://postgres:GzvTyXJxhFzFJfEMfjnQVAuwAkOjYpba@postgres.railway.internal:5432/railway";
+  "postgresql://postgres:Postgres123@base.railway.internal:5432/railway";
 
 const connectionString =
   process.env.DATABASE_PUBLIC_URL || process.env.DATABASE_URL || fallbackString;
