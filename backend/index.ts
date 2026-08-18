@@ -1,8 +1,8 @@
 import express from "express";
 import cors from "cors";
-import router from "./routes/health.js";
-import enquiry from "./routes/enquiries.js";
-import login from "./routes/login.js";
+import router from "./routes/health.ts";
+import enquiry from "./routes/enquiries.ts";
+import login from "./routes/login.ts";
 const app = express();
 const port = process.env.PORT || 3000;
 app.use(cors());
