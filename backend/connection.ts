@@ -1,8 +1,11 @@
 import "dotenv/config"; // Must stay at the absolute top of the page!
 import pg from "pg";
 
+const fallbackString =
+  "postgresql://postgres:Postgres123@proxy.railway.app:12345/railway";
+
 const connectionString =
-  process.env.DATABASE_PUBLIC_URL || process.env.DATABASE_URL;
+  process.env.DATABASE_PUBLIC_URL || process.env.DATABASE_URL || fallbackString;
 
 // Add this quick console debug line to prove what your server sees at launch
 console.log(
