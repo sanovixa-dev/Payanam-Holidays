@@ -45,7 +45,7 @@ enquiry.post("/enquiries", async (req: Request, res: Response) => {
   try {
     await resend_key.emails.send({
       from: "onboarding@resend.dev",
-      to: "kizhorekumar5@gmail.com",
+      to: "sakthidarshan2@gmail.com",
       subject: "New enquiry - Payanam Holidays",
       html: `<p>Name: ${name}</p>
             <p>Mobile No: ${phone}</p>
