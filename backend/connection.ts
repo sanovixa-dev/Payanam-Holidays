@@ -7,9 +7,11 @@ if (!connectionString) {
   throw new Error("DATABASE_URL is not set");
 }
 
-export const pool = new pg.Pool({
+const pool = new pg.Pool({
   connectionString,
   ssl: connectionString.includes("railway.internal")
     ? false
     : { rejectUnauthorized: false },
 });
+
+export default pool;
