@@ -21,6 +21,10 @@ const Login = () => {
         body: JSON.stringify(formData),
       });
       const data = await res.json();
+      console.log("====================================");
+      console.log("RES from Backend", res);
+      console.log("DATA", data);
+      console.log("====================================");
       if (res.ok) {
         localStorage.setItem("token", data.token);
         navigate("/DashBoard");
