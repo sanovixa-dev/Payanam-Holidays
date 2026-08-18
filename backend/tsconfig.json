@@ -11,7 +11,7 @@
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
     "outDir": "./dist",
-    "rootDir": "./src",
+    "rootDir": "./",
     "noEmit": false,
     "target": "esnext",
     "types": [],
